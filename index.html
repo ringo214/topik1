@@ -206,6 +206,7 @@ header{position:sticky;top:0;z-index:20;padding:14px 0 10px;
 .themes{display:flex;gap:8px;margin:2px 4px 0;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
 .themes::-webkit-scrollbar{display:none}
 .themes .chip{flex:none}
+.flabel{font-size:10.5px;font-weight:700;letter-spacing:1.5px;color:var(--mute);margin:14px 4px 7px}
 /* modal for date set */
 .modal{position:fixed;inset:0;z-index:80;background:rgba(10,7,24,.78);backdrop-filter:blur(4px);
   display:none;align-items:center;justify-content:center;padding:24px}
@@ -258,8 +259,11 @@ header{position:sticky;top:0;z-index:20;padding:14px 0 10px;
   <div class="plan" id="planGrid" style="display:none"></div>
 
 
-  <div class="sec"><span class="dot"></span><h2>出題範囲（単語）</h2></div>
+  <div class="sec"><span class="dot"></span><h2>出題範囲（単語）</h2><span id="filterCount" style="margin-left:auto;font-size:11px;color:var(--mute)"></span></div>
   <div class="chips" id="rangeChips"></div>
+  <div class="flabel">品詞でしぼる</div>
+  <div class="themes" id="posChips"></div>
+  <div class="flabel">テーマでしぼる</div>
   <div class="themes" id="themeChips"></div>
 
   <div class="sec"><span class="dot g"></span><h2>単語トレーニング</h2></div>
@@ -541,42 +545,90 @@ function markDayDone(day){
   if(!db.dayDone[day]){db.dayDone[day]=true;persist();}
 }
 
-/* ---------- テーマ別フィルタ ---------- */
-const THEMES=[
-  {key:'all',label:'全 1671',match:null},
-  {key:'family',label:'👪 家族・人',match:['家族','父','母親','兄','姉','弟','妹','祖父','祖母','おじ','おば','息子','娘','夫婦','妻','子供','赤ちゃん','親戚','友達','先輩','後輩']},
-  {key:'food',label:'🍚 食べ物',match:['食べ物','料理','ご飯','肉','魚','野菜','果物','りんご','パン','麺','スープ','キムチ','飲','お酒','コーヒー','紅茶','緑茶','お菓子','卵','豆腐','米','塩','砂糖','醤油','味噌','チゲ','スプーン','箸']},
-  {key:'time',label:'🗓 時間・日付',match:['曜日','時間','今日','明日','昨日','明後日','一昨日','朝','昼','夜','今週','来週','先週','毎日','時計','カレンダー','年齢','歳','季節','春','夏','秋','冬']},
-  {key:'place',label:'📍 場所',match:['学校','病院','会社','駅','市場','空港','銀行','図書館','公園','部屋','トイレ','建物','教室','食堂','喫茶','ホテル','劇場','映画館','美術館','博物館','郵便局','薬局','店','住所','場所']},
-  {key:'body',label:'🧍 体・健康',match:['頭','顔','目','鼻','口','耳','手の','足','腕','脚','身体','胸','お腹','首','肩','歯','髪','病気','薬','風邪','痛','けが','咳']},
-  {key:'color',label:'🎨 色',match:['赤','青','黄色','緑','黒','白','紫']},
-  {key:'verb',label:'🏃 動詞（〜다）',match:null,fn:w=>w.kr.endsWith('다')},
-  {key:'num',label:'🔢 数・量',match:['十','百','千','個','枚','台','回','番号','量','半分','以上']},
-];
-let THEME_ACTIVE='all';
-function buildThemes(){
-  const c=$('#themeChips');if(!c)return;c.innerHTML='';
-  THEMES.forEach(t=>{
-    const ch=document.createElement('div');ch.className='chip'+(t.key===THEME_ACTIVE?' on':'');
-    ch.textContent=t.label;
-    ch.onclick=()=>{
-      THEME_ACTIVE=t.key;
-      document.querySelectorAll('#themeChips .chip').forEach(x=>x.classList.remove('on'));
-      ch.classList.add('on');
-      const n=themeWords().length;
-      toast(t.label+'：'+n+'語で出題');
-    };
-    c.appendChild(ch);
-  });
+/* ---------- 単語タグ付け（品詞 + テーマの2軸）---------- */
+// 品詞：語尾で機械判定。全語が必ずどれか1つに入る（取りこぼしゼロ）
+const _ADV=['とても','非常に','たいへん','少し','ちょっと','たくさん','もっと','一番','最も','よく','常に','いつも','時々','たまに','すぐ','もう','まだ','また','再び','早く','速く','ゆっくり','本当に','確かに','多分','おそらく','必ず','絶対','全然','まったく','全く','あまり','すべて','みな','一緒に','一人で','独り','直接','特に','急に','突然','先に','まず','ついに','やっと','きっと','ぜひ','互いに','別々に','約','大体','ほとんど','全部','ずっと','しばらく','さっき','後で','前もって','改めて','そのまま','とりあえず','たいてい','普段','いつでも','どうして','なぜ','このように','そんなに','こんなに','しっかり','ちゃんと','まっすぐ','せっかく','むしろ','やはり','やっぱり','早速','じきに','まもなく','もうすぐ','まるで','ぐっすり','主に','熱心に','静かに','特別に','新しく'];
+const _NOUN_FIX=['にんにく'];
+function posOf(w){
+  if(w.kr.endsWith('다')){
+    const jp=w.jp.split(/[、（(]/)[0];
+    if(/(い|しい|たい)$/.test(jp)||(/だ$/.test(jp)&&!jp.includes('する')&&!jp.includes('になる')))return 'adj';
+    return 'verb';
+  }
+  const jp0=w.jp.split(/[、（(]/)[0];
+  if(!_NOUN_FIX.includes(jp0)&&(_ADV.includes(jp0)||/^.{1,3}(に|く)$/.test(jp0)))return 'adv';
+  return 'noun';
 }
-function themeWords(){
-  const t=THEMES.find(x=>x.key===THEME_ACTIVE);
-  if(!t||t.key==='all')return rangeWords();
-  let base=rangeWords();
-  if(t.fn)return base.filter(t.fn);
-  if(t.match)return base.filter(w=>t.match.some(m=>w.jp.includes(m)));
+// テーマ：意味ベース（日本語訳の部分一致）。複数該当あり。該当なしの語は品詞で拾える
+const TOPIC_DEFS=[
+  ['greet','🙇 あいさつ',['ありがとう','すみません','ごめん','こんにちは','もしもし','はじめまして','おめでとう','ようこそ','失礼','大丈夫です','いらっしゃい','お久しぶり','さようなら','わかりました','どういたしまして','乾杯']],
+  ['family','👪 家族',['家族','父','母','兄','姉','弟','妹','祖父','祖母','おじ','おば','息子','娘','夫','妻','夫婦','子供','赤ちゃん','親戚','友達','先輩','後輩','恋人','彼','大人','主人','奥さん']],
+  ['person','🧑 職業・人',['先生','学生','医者','看護','警察','店員','社員','社長','部長','記者','歌手','俳優','選手','運転手','公務員','弁護士','作家','画家','主婦','会社員','銀行員','客','職員','大統領','軍人','料理人','美容師','薬剤師','教授']],
+  ['body','🧍 体・健康',['頭','顔','目','鼻','口','耳','手','足','腕','脚','体','胸','腹','首','肩','歯','髪','背','腰','膝','指','血','涙','汗','病気','薬','風邪','けが','咳','熱','痛','診','入院','手術','治療','健康','患者','注射']],
+  ['food','🍚 食べ物',['食べ','料理','ご飯','飯','肉','魚','野菜','果物','りんご','みかん','バナナ','ぶどう','いちご','桃','すいか','梨','パン','麺','スープ','汁','キムチ','飲','酒','ビール','コーヒー','紅茶','緑茶','ジュース','牛乳','お菓子','菓子','飴','卵','豆','米','塩','砂糖','醤油','味噌','酢','チゲ','スプーン','箸','皿','コップ','カップ','チキン','ピザ','カレー','餅','おかず','間食','おやつ','甘','辛','焼く','茹']],
+  ['time','🗓 時間・日付',['曜日','時間','今日','明日','昨日','明後日','一昨日','朝','昼','夜','夕','晩','今週','来週','先週','毎日','毎週','時計','カレンダー','暦','年齢','歳','季節','春','夏','秋','冬','午前','午後','今年','来年','昨年','過去','未来','現在','最近','この頃','普段','期間','瞬間','昔','正午','深夜','明け方']],
+  ['place','📍 場所',['学校','病院','会社','駅','市場','空港','銀行','図書館','公園','部屋','トイレ','建物','教室','食堂','喫茶','カフェ','ホテル','劇場','映画館','美術館','博物館','郵便局','薬局','市役所','警察署','大使館','寮','下宿','教会','寺','工場','事務所','会議室','駐車場','売り場','入口','出口','屋上','田舎','都市','都会','街','村','町','地方','地域','近所','周辺','付近','場所']],
+  ['nature','🌳 自然・天気',['空','海','山','川','森','花','草','石','土','砂','雲','雨','雪','風','雷','霧','虹','星','太陽','陽','天気','気温','気候','台風','地震','氷','湖','池','島','畑','葉','晴','曇','植物','動物','犬','猫','鳥','虫','馬','牛','豚','鶏','虎','蝶','花屋']],
+  ['transport','🚃 交通・移動',['バス','電車','地下鉄','タクシー','飛行機','自転車','自動車','船','汽車','列車','道','道路','橋','信号','切符','乗','降','運転','交通','旅行','出発','到着','歩','停留所','横断歩道','駐車','航空']],
+  ['shop','🛍 買い物・お金',['買','売','値段','価格','お金','円','ウォン','ドル','現金','カード','財布','両替','割引','セール','無料','ただ','料金','費用','代金','支払','会計','商品','品物','袋','包装','貯金','給料','月給','稼','貸','借','プレゼント','贈','釣り銭','小銭']],
+  ['clothes','👕 衣類・持ち物',['服','シャツ','ズボン','スカート','ワンピース','コート','ジャケット','セーター','下着','靴','靴下','帽子','手袋','眼鏡','指輪','ネックレス','鞄','傘','ハンカチ','タオル','鍵','ネクタイ','スーツ','制服','水着','着る','履く','化粧','口紅','石鹸','歯ブラシ','歯磨き','鏡','アクセサリ']],
+  ['home','🏠 家・家具',['台所','居間','寝室','浴室','ベッド','机','椅子','いす','棚','本棚','箪笥','ソファ','テーブル','ドア','窓','壁','床','天井','階段','冷蔵庫','洗濯機','掃除機','テレビ','エアコン','扇風機','カーテン','布団','枕','毛布','鍋','フライパン','包丁','食器','ゴミ箱','引っ越']],
+  ['study','📚 学校・勉強',['勉強','授業','宿題','試験','テスト','問題','質問','答','単語','文法','文章','教科書','ノート','鉛筆','消しゴム','黒板','辞書','専攻','大学','卒業','入学','成績','点数','学期','学年','留学','発表','研究','練習','講義','塾','読書','学問','知識','教育','本']],
+  ['leisure','🎮 趣味・スポーツ',['映画','音楽','歌','ドラマ','ゲーム','旅行','運動','スポーツ','サッカー','野球','バスケ','バレー','テニス','水泳','卓球','ゴルフ','スキー','登山','釣り','散歩','写真','絵','踊','ダンス','楽器','ピアノ','ギター','バイオリン','趣味','遊','コンサート','公演','演奏','カラオケ','パーティ','観光','休暇']],
+  ['comm','📱 通信・メディア',['電話','携帯','スマホ','メール','手紙','はがき','封筒','切手','小包','新聞','雑誌','ラジオ','ニュース','放送','広告','インターネット','パソコン','コンピュータ','カメラ','番号','連絡','メッセージ','ホームページ','情報','メモ']],
+  ['nation','🌏 国・言語',['韓国','日本','中国','米国','アメリカ','イギリス','英国','フランス','ドイツ','ロシア','インド','ソウル','東京','釜山','北京','外国','ハングル','漢字','英語','韓国語','日本語','中国語','世界','海外','東洋','西洋','アジア','ヨーロッパ','地図','国籍','国際']],
+  ['emotion','💭 感情・心',['嬉し','悲し','楽し','怒','寂し','怖','恥','心配','安心','驚','感動','満足','後悔','緊張','幸せ','幸福','不安','気持ち','気分','愛','好き','嫌','興味','関心','希望','夢','つらい','苦し','喜','悩','感謝','残念','期待','涙','笑']],
+  ['abstract','💡 抽象・概念',['理由','方法','目的','結果','原因','内容','意味','関係','状況','状態','理解','考え','意見','計画','約束','秘密','責任','自由','平和','努力','成功','失敗','違い','特徴','長所','短所','種類','程度','部分','全体','中心','基本','重要','必要','可能','事実','理想','記憶','経験','習慣','性格','能力','才能','価値']],
+];
+function topicsOf(w){return TOPIC_DEFS.filter(([k,l,kws])=>kws.some(m=>w.jp.includes(m))).map(([k])=>k)}
+// 各語にタグを一度だけ付与してキャッシュ
+WORDS.forEach(w=>{w._pos=posOf(w);w._topics=topicsOf(w);});
+
+// フィルタの状態：kind='all' | pos:xxx | topic:xxx
+let FILTER={kind:'all',key:null};
+const POS_DEFS=[['noun','📦 名詞'],['verb','🏃 動詞'],['adj','🎨 形容詞'],['adv','⚡ 副詞']];
+function filterWordsAll(){ // レンジ＆フィルタ両方を反映
+  let base=WORDS.filter(w=>w.no>=RANGE.start&&w.no<=RANGE.end);
+  if(FILTER.kind==='pos')return base.filter(w=>w._pos===FILTER.key);
+  if(FILTER.kind==='topic')return base.filter(w=>w._topics.includes(FILTER.key));
   return base;
 }
+function filterLabel(){
+  if(FILTER.kind==='pos')return (POS_DEFS.find(p=>p[0]===FILTER.key)||[])[1]||'';
+  if(FILTER.kind==='topic')return (TOPIC_DEFS.find(t=>t[0]===FILTER.key)||[])[1]||'';
+  return '全 '+WORDS.length;
+}
+function clearFilterChips(){
+  document.querySelectorAll('#posChips .chip, #themeChips .chip').forEach(x=>x.classList.remove('on'));
+}
+function updateFilterCount(){
+  const fc=$('#filterCount');if(fc)fc.textContent=filterLabel()+' ・ '+filterWordsAll().length+'語';
+}
+function selectFilter(kind,key,el){
+  // 同じものを再タップで解除→all
+  if(FILTER.kind===kind&&FILTER.key===key){FILTER={kind:'all',key:null};clearFilterChips();updateFilterCount();toast('全'+WORDS.length+'語にもどしました');return;}
+  FILTER={kind,key};clearFilterChips();if(el)el.classList.add('on');
+  updateFilterCount();
+  const n=filterWordsAll().length;
+  toast(filterLabel()+'：'+n+'語で出題');
+}
+function buildFilters(){
+  const pc=$('#posChips');
+  if(pc){pc.innerHTML='';POS_DEFS.forEach(([k,label])=>{
+    const n=WORDS.filter(w=>w._pos===k).length;
+    const ch=document.createElement('div');ch.className='chip';ch.textContent=label+' '+n;
+    ch.onclick=()=>selectFilter('pos',k,ch);pc.appendChild(ch);
+  });}
+  const tc=$('#themeChips');
+  if(tc){tc.innerHTML='';TOPIC_DEFS.forEach(([k,label])=>{
+    const n=WORDS.filter(w=>w._topics.includes(k)).length;
+    const ch=document.createElement('div');ch.className='chip';ch.textContent=label+' '+n;
+    ch.onclick=()=>selectFilter('topic',k,ch);tc.appendChild(ch);
+  });}
+  updateFilterCount();
+}
+
+
 
 
 /* ---------- home stats ---------- */
@@ -606,7 +658,7 @@ function start(mode){
 }
 // 各モードで「全部」を選んだときの最大問題数（プール上限）
 function maxCount(mode){
-  if(mode==='w_kj'||mode==='w_jk')return Math.min(themeWords().length,100);
+  if(mode==='w_kj'||mode==='w_jk')return Math.min(filterWordsAll().length,100);
   if(mode==='w_weak')return Object.keys(db.weak).length;
   if(mode==='g_fill')return GFILL_POOL.length;
   if(mode==='g_mean'||mode==='g_sent')return GRAMMAR.length;
@@ -616,7 +668,7 @@ function maxCount(mode){
 }
 function startQuiz(mode,count){
   Q={list:[],i:0,correct:0,wrong:[],mode:mode,count:count,answered:false,timed:false,t0:Date.now()};
-  if(mode==='w_kj'||mode==='w_jk') Q.list=buildWordQs(mode,count,themeWords());
+  if(mode==='w_kj'||mode==='w_jk') Q.list=buildWordQs(mode,count,filterWordsAll());
   else if(mode==='today_kj') Q.list=buildWordQs('w_kj',count,dayWords(TODAY_CTX.day));
   else if(mode==='today_jk') Q.list=buildWordQs('w_jk',count,dayWords(TODAY_CTX.day));
   else if(mode==='w_weak') Q.list=buildWeakQs(count);
@@ -1043,7 +1095,7 @@ let FC={list:[],i:0,known:0,day:null};
 function flashWords(s,e,day){
   let pool;
   if(typeof s==='number'&&typeof e==='number'){pool=WORDS.filter(w=>w.no>=s&&w.no<=e);}
-  else{pool=themeWords();}
+  else{pool=filterWordsAll();}
   FC={list:shuffle(pool),i:0,known:0,day:day||null};
   openScreen();renderFlash('word');
 }
@@ -1160,7 +1212,7 @@ openScreen=function(){_open();const w=$('#qwrap');w.style.justifyContent='';};
 
 /* ---------- init ---------- */
 $('#setDateBtn').onclick=openDateModal;
-buildChips();buildThemes();renderDaily();refreshHome();
+buildChips();buildFilters();renderDaily();refreshHome();
 // 初回（試験日未設定）はモーダルをそっと促す
 if(!db.examDate){setTimeout(openDateModal,500);}
 </script>
