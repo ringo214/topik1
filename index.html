@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#16131f">
+<title>TOPIK I 頻出A 300</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+JP:wght@400;500;700;900&family=Bagel+Fat+One&display=swap');
+:root{
+  --bg:#16131f; --bg2:#1d1830; --panel:#241f38; --panel2:#2b2542;
+  --ink:#f5f1ff; --sub:#bdb2dd; --mute:#857aa6; --line:#37305a;
+  --amber:#ffb347; --amber2:#ffcd7a; --coral:#ff6b6b; --mint:#54e6c1; --grape:#b18cff;
+  --ok:#54e6c1; --ng:#ff6b6b; --shadow:0 16px 44px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:
+    radial-gradient(1100px 520px at 88% -8%, rgba(255,179,71,.16), transparent 58%),
+    radial-gradient(820px 460px at -12% 108%, rgba(177,140,255,.16), transparent 56%),
+    linear-gradient(168deg,var(--bg),var(--bg2));
+  color:var(--ink); min-height:100vh; overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.kr{font-family:'Gowun Dodum',sans-serif}
+.app{max-width:540px;margin:0 auto;padding:0 16px 90px;min-height:100vh}
+/* header */
+header{position:sticky;top:0;z-index:20;padding:16px 0 10px;
+  background:linear-gradient(180deg,rgba(22,19,31,.97),rgba(22,19,31,.72) 72%,transparent);
+  backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:flex-end;gap:11px}
+.logo{font-family:'Bagel Fat One',cursive;font-size:25px;letter-spacing:.3px;line-height:.95;
+  background:linear-gradient(96deg,var(--amber),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{display:block;font-family:'Noto Sans JP';font-weight:700;font-size:10px;color:var(--mute);letter-spacing:3px;margin-top:3px;-webkit-text-fill-color:var(--mute)}
+.dday{margin-left:auto;text-align:right}
+.dday b{font-family:'Bagel Fat One',cursive;font-size:22px;color:var(--amber);line-height:1}
+.dday span{display:block;font-size:9.5px;color:var(--mute);letter-spacing:1.5px;margin-top:2px}
+/* hero */
+.hero{margin-top:8px;border-radius:24px;padding:20px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--panel2),var(--panel));border:1px solid var(--line);box-shadow:var(--shadow)}
+.hero:before{content:"";position:absolute;inset:0;background:
+  radial-gradient(360px 170px at 112% -22%,rgba(255,179,71,.28),transparent 60%);pointer-events:none}
+.hero h1{font-size:17px;font-weight:900;line-height:1.5;position:relative}
+.hero h1 em{font-style:normal;color:var(--amber2)}
+.hero p{color:var(--sub);font-size:12px;margin-top:7px;line-height:1.7;position:relative}
+.bar{height:9px;border-radius:99px;background:rgba(0,0,0,.32);overflow:hidden;margin-top:15px;position:relative}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(92deg,var(--amber),var(--coral));transition:width .5s}
+.statrow{display:flex;gap:10px;margin-top:13px;position:relative}
+.stat{flex:1;background:rgba(0,0,0,.24);border:1px solid var(--line);border-radius:15px;padding:10px 8px;text-align:center}
+.stat b{display:block;font-size:20px;font-family:'Bagel Fat One',cursive;color:var(--mint)}
+.stat span{font-size:9.5px;color:var(--mute);letter-spacing:1px}
+.setrow{margin-top:12px;position:relative;display:flex;gap:8px}
+.setbtn{font-size:11.5px;font-weight:700;color:var(--amber2);background:rgba(255,179,71,.12);
+  border:1px solid rgba(255,179,71,.32);padding:7px 13px;border-radius:999px;cursor:pointer}
+/* section */
+.sec{margin:26px 4px 12px;display:flex;align-items:center;gap:8px}
+.sec h2{font-size:13.5px;font-weight:900;letter-spacing:.5px}
+.sec .dot{width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.sec .dot.a{background:var(--amber)} .sec .dot.m{background:var(--mint)} .sec .dot.g{background:var(--grape)}
+.sec .cnt{margin-left:auto;font-size:11px;color:var(--mute)}
+/* mode grid */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode{position:relative;border:1px solid var(--line);border-radius:20px;padding:16px 14px;cursor:pointer;
+  background:linear-gradient(160deg,var(--panel),rgba(36,31,56,.55));overflow:hidden;transition:transform .12s,border-color .2s}
+.mode:active{transform:scale(.96)}
+.mode .ic{font-size:25px;display:block;margin-bottom:8px}
+.mode .t{font-weight:900;font-size:14.5px;line-height:1.25}
+.mode .d{font-size:11px;color:var(--sub);margin-top:5px;line-height:1.55}
+.mode .tag{position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;color:var(--bg);
+  background:var(--amber);padding:2px 7px;border-radius:8px}
+.mode.full{grid-column:1/3;background:linear-gradient(120deg,rgba(255,179,71,.18),rgba(255,107,107,.13));border-color:rgba(255,179,71,.4)}
+.mode.full .t{font-size:16px} .mode.full .ic{font-size:28px}
+.mode.ghost{background:linear-gradient(160deg,rgba(177,140,255,.12),rgba(36,31,56,.5));border-color:rgba(177,140,255,.3)}
+/* chips */
+.flabel{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--mute);margin:16px 4px 8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 4px}
+.chip{font-size:11.5px;font-weight:700;padding:8px 13px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel);color:var(--sub);cursor:pointer;transition:.15s}
+.chip.on{background:linear-gradient(92deg,var(--amber),var(--amber2));color:#3a2400;border-color:transparent}
+/* screen */
+.screen{position:fixed;inset:0;z-index:50;background:linear-gradient(168deg,var(--bg),var(--bg2));
+  display:none;flex-direction:column;padding:0 16px calc(20px + env(safe-area-inset-bottom));overflow-y:auto}
+.screen.show{display:flex}
+.qhead{position:sticky;top:0;padding:14px 0 10px;display:flex;align-items:center;gap:12px;
+  background:linear-gradient(180deg,var(--bg),rgba(22,19,31,.6) 80%,transparent);backdrop-filter:blur(6px);z-index:5}
+.xbtn{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  font-size:18px;cursor:pointer;flex:none}
+.prog{flex:1;height:9px;border-radius:99px;background:rgba(0,0,0,.3);overflow:hidden}
+.prog i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(92deg,var(--mint),var(--amber));transition:width .35s}
+.qcount{font-size:12px;font-weight:700;color:var(--sub);flex:none}
+.qwrap{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 0 16px;max-width:540px;width:100%;margin:0 auto}
+.qtype{font-size:10.5px;font-weight:700;letter-spacing:2px;color:var(--amber2);text-align:center;margin-bottom:14px}
+/* example-sentence card (signature) */
+.excard{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);
+  border-radius:24px;padding:30px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.excard:before{content:"";position:absolute;inset:0;background:radial-gradient(320px 150px at 50% -30%,rgba(255,179,71,.16),transparent);pointer-events:none}
+.exlabel{font-size:11px;color:var(--mute);text-align:center;margin-bottom:14px;position:relative}
+.exsent{font-family:'Gowun Dodum';font-size:23px;font-weight:700;line-height:1.6;text-align:center;position:relative;word-break:keep-all}
+.exsent .hl{color:var(--amber);border-bottom:3px solid rgba(255,179,71,.5);padding-bottom:1px}
+.exjp{font-size:14px;color:var(--sub);text-align:center;margin-top:16px;line-height:1.7;position:relative;
+  max-height:0;overflow:hidden;opacity:0;transition:max-height .4s,opacity .4s,margin .4s}
+.exjp.show{max-height:200px;opacity:1;margin-top:16px}
+.exword{text-align:center;margin-top:18px;position:relative;max-height:0;overflow:hidden;opacity:0;transition:.4s}
+.exword.show{max-height:120px;opacity:1}
+.exword .w{font-family:'Gowun Dodum';font-size:28px;font-weight:700;color:var(--ink)}
+.exword .m{font-size:15px;color:var(--amber2);margin-top:4px;font-weight:700}
+.exword .p{font-size:11px;color:var(--mute);margin-top:5px}
+.qword{font-size:36px;font-weight:900;line-height:1.3;word-break:break-word;text-align:center;position:relative}
+.qword.kr{font-family:'Gowun Dodum'}
+.qprompt{font-size:13px;color:var(--sub);margin-bottom:10px;text-align:center;position:relative}
+.qsub{font-size:12px;color:var(--mute);margin-top:10px;text-align:center}
+.opts{display:grid;gap:11px;margin-top:18px}
+.opt{padding:15px 16px;border-radius:16px;border:1.5px solid var(--line);background:var(--panel);
+  font-size:16px;font-weight:700;cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;transition:.12s;color:var(--ink)}
+.opt .num{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:13px;color:var(--sub);flex:none}
+.opt.kr{font-family:'Gowun Dodum'}
+.opt:active{transform:scale(.985)}
+.opt.correct{border-color:var(--ok);background:linear-gradient(92deg,rgba(84,230,193,.26),rgba(84,230,193,.08))}
+.opt.correct .num{background:var(--ok);color:#053b30}
+.opt.wrong{border-color:var(--ng);background:linear-gradient(92deg,rgba(255,107,107,.24),rgba(255,107,107,.07))}
+.opt.wrong .num{background:var(--ng);color:#3a0000}
+.opt.dim{opacity:.4}
+.feedback{margin-top:16px;border-radius:18px;padding:15px 16px;display:none;animation:pop .25s}
+.feedback.show{display:block}
+.feedback.ok{background:rgba(84,230,193,.1);border:1px solid rgba(84,230,193,.38)}
+.feedback.ng{background:rgba(255,107,107,.09);border:1px solid rgba(255,107,107,.34)}
+.feedback .ft{font-weight:900;font-size:14px;margin-bottom:6px}
+.feedback.ok .ft{color:var(--ok)} .feedback.ng .ft{color:var(--ng)}
+.feedback .fx{font-size:13px;color:var(--sub);line-height:1.7}
+.feedback .fx .ko{font-family:'Gowun Dodum';color:var(--ink)}
+.btn{margin-top:14px;width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;
+  font-family:'Noto Sans JP';font-weight:900;font-size:15px;color:#3a2400;
+  background:linear-gradient(92deg,var(--amber),var(--amber2));box-shadow:0 8px 24px rgba(255,179,71,.34)}
+.btn:active{transform:scale(.98)}
+.btn.mint{background:linear-gradient(92deg,var(--mint),#7af0d8);color:#053b30;box-shadow:0 8px 24px rgba(84,230,193,.3)}
+.btn.ghost{background:var(--panel);color:var(--sub);border:1px solid var(--line);box-shadow:none}
+/* result */
+.result{text-align:center;padding:26px 10px}
+.result .ring{width:160px;height:160px;margin:6px auto 0;position:relative}
+.result .score{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.result .score b{font-size:44px;font-family:'Bagel Fat One',cursive;line-height:1}
+.result .score span{font-size:12px;color:var(--mute)}
+.result h3{font-size:21px;font-weight:900;margin:16px 0 6px}
+.result p{color:var(--sub);font-size:13px;line-height:1.7}
+.rstats{display:flex;gap:10px;margin:20px 0}
+.rstats div{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:12px}
+.rstats b{display:block;font-size:21px;font-family:'Bagel Fat One',cursive}
+.rstats span{font-size:9.5px;color:var(--mute)}
+.review{text-align:left;margin-top:8px}
+.review .ri{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:9px}
+.review .ri .q{font-weight:700;font-size:15px;font-family:'Gowun Dodum'}
+.review .ri .a{font-size:12px;margin-top:5px;color:var(--sub)}
+.review .ri .a .c{color:var(--ok)}
+/* browse */
+.searchbar{display:flex;gap:8px;margin:2px 0 14px}
+.searchbar input{flex:1;padding:13px 15px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:inherit;font-size:14px;outline:none}
+.searchbar input::placeholder{color:var(--mute)}
+.wlist .wi{padding:14px 15px;border-radius:14px;background:var(--panel);border:1px solid var(--line);margin-bottom:9px}
+.wlist .wi .top{display:flex;align-items:baseline;gap:10px}
+.wlist .wi .no{font-size:11px;color:var(--mute);width:30px;flex:none}
+.wlist .wi .k{font-family:'Gowun Dodum';font-weight:700;font-size:18px;flex:none}
+.wlist .wi .pos{font-size:10px;color:var(--bg);background:var(--grape);padding:1px 7px;border-radius:7px;font-weight:700}
+.wlist .wi .j{font-size:13px;color:var(--sub);margin-left:auto;text-align:right}
+.wlist .wi .ex{font-size:12.5px;color:var(--mute);margin-top:9px;line-height:1.65;border-top:1px dashed var(--line);padding-top:9px}
+.wlist .wi .ex .ko{font-family:'Gowun Dodum';color:var(--sub);display:block}
+.empty{text-align:center;color:var(--mute);padding:40px;font-size:13px}
+/* modal */
+.modal{position:fixed;inset:0;z-index:80;background:rgba(10,8,18,.8);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px}
+.modal.show{display:flex}
+.modal .box{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:24px;max-width:340px;width:100%;box-shadow:var(--shadow)}
+.modal h3{font-size:17px;font-weight:900;margin-bottom:6px}
+.modal p{font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:16px}
+.modal input[type=date]{width:100%;padding:13px 15px;border-radius:14px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font-family:inherit;font-size:15px;outline:none;margin-bottom:14px}
+.modal .quick{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.modal .quick button{font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--sub);cursor:pointer}
+.modal .mbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal .mbtns button{padding:13px;border:none;border-radius:14px;font-family:inherit;font-weight:900;font-size:14px;cursor:pointer}
+.modal .mbtns .ok{background:linear-gradient(92deg,var(--amber),var(--amber2));color:#3a2400}
+.modal .mbtns .cancel{background:var(--panel);color:var(--sub);border:1px solid var(--line)}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:11px 20px;border-radius:999px;font-size:13px;font-weight:700;z-index:99;transition:.3s;box-shadow:var(--shadow);pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fade{animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.footer{text-align:center;color:var(--mute);font-size:10px;margin-top:26px;line-height:1.7}
+.tapcard{cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app" id="home">
+  <header>
+    <div class="brand">
+      <div class="logo">TOPIK I<small>빈출 A · 頻出A 300語</small></div>
+      <div class="dday" id="dday" onclick="openDateModal()"><b id="ddayN">–</b><span id="ddayL">試験日設定</span></div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>頻出A <em>300語</em>だけ。<br>例文ごと、本番までに体に入れる。</h1>
+    <p>単語帳の頻出Aを完全収録。1語につき例文が2つ。読めれば解ける——だから例文で覚えます。</p>
+    <div class="bar"><i id="heroBar"></i></div>
+    <div class="statrow">
+      <div class="stat"><b id="stMastered">0</b><span>覚えた語</span></div>
+      <div class="stat"><b id="stAcc">-</b><span>正答率</span></div>
+      <div class="stat"><b id="stWeak">0</b><span>苦手</span></div>
+    </div>
+    <div class="setrow"><span class="setbtn" onclick="openDateModal()">📅 試験日</span><span class="setbtn" onclick="resetProgress()">↺ 進捗リセット</span></div>
+  </div>
+
+  <div class="sec"><span class="dot a"></span><h2>例文で覚える</h2></div>
+  <div class="grid">
+    <div class="mode full" onclick="start('ex')"><span class="ic">📖</span><div class="t">例文モード</div><div class="d">例文の中で単語に出会う。タップで意味と訳が出る。覚えたか自己採点して苦手を仕分け。</div></div>
+  </div>
+
+  <div class="sec"><span class="dot"></span><h2>クイズで確認</h2><span class="cnt" id="poolCnt"></span></div>
+  <div class="flabel">品詞でしぼる（全語カバー）</div>
+  <div class="chips" id="posChips"></div>
+  <div class="flabel">出題範囲</div>
+  <div class="chips" id="rangeChips"></div>
+  <div class="grid" style="margin-top:14px">
+    <div class="mode" onclick="start('w_kj')"><span class="ic">🇰🇷</span><div class="t">韓 → 日</div><div class="d">ハングルを見て意味を4択</div></div>
+    <div class="mode" onclick="start('w_jk')"><span class="ic">🇯🇵</span><div class="t">日 → 韓</div><div class="d">意味を見てハングルを4択</div></div>
+    <div class="mode" onclick="start('ex_quiz')"><span class="ic">✍️</span><div class="t">例文穴埋め</div><div class="d">文に合う単語を4択で選ぶ</div></div>
+    <div class="mode" onclick="start('flash')"><span class="ic">🃏</span><div class="t">フラッシュ<br>カード</div><div class="d">めくって暗記。サクサク周回</div></div>
+  </div>
+
+  <div class="sec"><span class="dot m"></span><h2>弱点をつぶす</h2></div>
+  <div class="grid">
+    <div class="mode full ghost" onclick="start('weak')"><span class="ic">💢</span><div class="t">苦手だけ復習</div><div class="d">間違えた単語だけを集中ドリル。本番前の総仕上げに。</div><span class="tag" id="weakTag">0</span></div>
+  </div>
+
+  <div class="sec"><span class="dot g"></span><h2>一覧で確認</h2></div>
+  <div class="grid">
+    <div class="mode full" onclick="start('browse')"><span class="ic">📚</span><div class="t">単語リスト（300語）</div><div class="d">番号・ハングル・意味・例文を検索して確認</div></div>
+  </div>
+
+  <div class="footer">頻出A 300語 ／ 例文600本収録<br>学習データはこの端末内にのみ保存されます。화이팅! 🔥</div>
+</div>
+
+<div class="screen" id="screen">
+  <div class="qhead"><button class="xbtn" onclick="quit()">✕</button><div class="prog"><i id="progBar"></i></div><div class="qcount" id="qCount"></div></div>
+  <div class="qwrap" id="qwrap"></div>
+</div>
+
+<div class="modal" id="dateModal"><div class="box">
+  <h3>📅 試験日はいつ？</h3>
+  <p>設定すると、本番までの残り日数（D-）が表示されます。</p>
+  <div class="quick" id="quickDates"></div>
+  <input type="date" id="dateInput">
+  <div class="mbtns"><button class="cancel" onclick="closeDateModal()">あとで</button><button class="ok" onclick="saveExamDate()">決定</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WORDS = [{"no":1,"kr":"가다","pron":"","pos":"動","posCat":"verb","jp":"行く","ex":[["오늘은 학교 공부하러 갑니다.","今日は学校へ勉強しに行きます。"],["여동생이 일본에 여행을 갑니다.","妹が日本に旅行に行きます。"]]},{"no":2,"kr":"오다","pron":"","pos":"動","posCat":"verb","jp":"来る","ex":[["친구가 오늘 우리 집에 옵니다.","友達が今日家に来ます。"],["회사에 사장님도 오십니다.","会社には社長も来られます。"]]},{"no":3,"kr":"있다","pron":"읻따","pos":"形","posCat":"adj","jp":"ある、いる","ex":[["은행은 이 건물에 있습니다.","銀行はこの建物にあります。"],["저는 카메라가 있어요.","私はカメラがあります。"]]},{"no":4,"kr":"없다","pron":"업따","pos":"形","posCat":"adj","jp":"ない、いない","ex":[["이번 주에는 약속이 없습니다.","今週は約束がありません。"],["교실에 학생이 없습니다.","教室に学生がいません。"]]},{"no":5,"kr":"여자","pron":"","pos":"名","posCat":"noun","jp":"女、女性","ex":[["여기는 여자 화장실입니다.","ここは女子トイレです。"],["저기 여자 친구가 있어요.","あそこに彼女がいます。"]]},{"no":6,"kr":"남자","pron":"","pos":"名","posCat":"noun","jp":"男、男性","ex":[["남자는 운동을 가고 싶습니다.","男性は運動に行きたいです。"],["저는 남자 친구가 있어요.","私は彼氏がいます。"]]},{"no":7,"kr":"친구","pron":"","pos":"名","posCat":"noun","jp":"友達","ex":[["친구와 같이 시장에 갑니다.","友達と一緒に市場に行きます。"],["제 친구는 한국 사람입니다.","私の友達は韓国人です。"]]},{"no":8,"kr":"싫다","pron":"실타","pos":"形","posCat":"adj","jp":"嫌だ、嫌いだ","ex":[["숙제가 너무 많아요.","宿題がとても多いです。"],["저는 매운 음식이 싫어요.","私は辛い食べ物が嫌いです。"]]},{"no":9,"kr":"좋다","pron":"조타","pos":"形","posCat":"adj","jp":"よい、好きだ","ex":[["날씨가 좋아서 기분이 좋아요.","天気が良くて気分がいいです。"],["월요일도 좋지만 일요일이 더 좋아요.","月曜日もいいけど日曜日がもっといいです。"]]},{"no":10,"kr":"만나다","pron":"","pos":"動","posCat":"verb","jp":"会う","ex":[["어제 만난 사람은 이상한 사람입니다.","昨日会った人は変な人です。"],["백화점에서 친구를 만났습니다.","百貨店で友達に会いました。"]]},{"no":11,"kr":"사다","pron":"","pos":"動","posCat":"verb","jp":"買う","ex":[["어머니의 생일 선물을 샀습니다.","母の誕生日プレゼントを買いました。"],["편의점에서 산 바나나가 맛있었습니다.","コンビニで買ったバナナがおいしかったです。"]]},{"no":12,"kr":"지금","pron":"","pos":"副/名","posCat":"adv","jp":"今","ex":[["지금 책을 읽고 있습니다.","今、本を読んでいます。"],["어머니는 지금 출발했습니다.","母は今出発しました。"]]},{"no":13,"kr":"-고 싶다","pron":"고 십따","pos":"補形","posCat":"aux","jp":"〜したい","ex":[["배가 고파서 밥을 먹고 싶습니다.","お腹が空いたのでご飯を食べたいです。"],["오늘은 디즈니랜드에 가고 싶습니다.","今日はディズニーランドに行きたいです。"]]},{"no":14,"kr":"먹다","pron":"먹따","pos":"動","posCat":"verb","jp":"食べる、飲む","ex":[["제 도시락을 먹은 사람이 누구예요?","私のお弁当を食べた人は誰ですか。"],["감기에 걸려서 감기약을 먹었습니다.","風邪をひいたので風邪薬を飲みました。"]]},{"no":15,"kr":"좋아하다","pron":"조아하다","pos":"動","posCat":"verb","jp":"好きだ、好む","ex":[["나는 한국 드라마를 좋아해요.","私は韓国ドラマが好きです。"],["어제는 좋아하는 가수의 콘서트에 갔어요.","昨日は好きな歌手のコンサートに行きました。"]]},{"no":16,"kr":"많다","pron":"만타","pos":"形","posCat":"adj","jp":"多い","ex":[["숙제가 너무 많아요.","宿題がとても多いです(多すぎます)。"],["나는 하고 싶은 것이 많은 사람이에요.","私はやりたいことが多い人です。"]]},{"no":17,"kr":"많이","pron":"마니","pos":"副","posCat":"adv","jp":"たくさん、多く","ex":[["어제는 친구들과 이야기를 많이 했습니다.","昨日は友人たちと話をたくさんしました。"],["술을 너무 많이 마셨습니다.","お酒を飲みすぎました。"]]},{"no":18,"kr":"되다","pron":"되다/뒈다","pos":"動","posCat":"verb","jp":"〜になる","ex":[["제 꿈은 가수가 되는 것이에요.","私の夢は歌手になることです。"],["저는 열심히 공부해서 의사가 됐어요.","私は一生懸命勉強して医者になりました。"]]},{"no":19,"kr":"살다","pron":"","pos":"動","posCat":"verb","jp":"住む、暮らす、生きる","ex":[["저는 나중에 한국에서 살고 싶습니다.","私は将来、韓国で暮らしたいです。"],["그는 지금 신주쿠에 살아요.","彼は今、新宿に住んでいます。"]]},{"no":20,"kr":"잘","pron":"","pos":"副","posCat":"adv","jp":"よく、上手に","ex":[["그 사람은 춤을 잘 춰요.","あの人は踊りを上手に踊ります。"],["저는 매운 음식도 잘 먹어요.","私は辛い食べ物もよく食べます。"]]},{"no":21,"kr":"전화","pron":"","pos":"名","posCat":"noun","jp":"電話","ex":[["전화로 연락 주세요.","お電話でご連絡ください。"],["급한 일이 있으면 전화하세요.","急用であればお電話ください。"]]},{"no":22,"kr":"운동","pron":"","pos":"名","posCat":"noun","jp":"運動","ex":[["운동을 할 때는 운동화를 신으세요.","運動をする時は運動靴を履いてください。"],["운동장에서 운동복을 입고 운동을 합니다.","運動場で運動服を着て運動をします。"]]},{"no":23,"kr":"여행","pron":"","pos":"名","posCat":"noun","jp":"旅行","ex":[["가족들과 바다로 여행을 갔습니다.","家族と海へ旅行に行きました。"],["작년 가을에 여행을 갔다 왔습니다.","去年の秋に旅行に行ってきました。"]]},{"no":24,"kr":"좀","pron":"","pos":"副","posCat":"adv","jp":"ちょっと、少し","ex":[["좀 부탁드립니다.","ちょっとお願いいたします。"],["오늘은 좀 덥네요.","今日は少し暑いですね。"]]},{"no":25,"kr":"영화","pron":"","pos":"名","posCat":"noun","jp":"映画","ex":[["저는 쉬는 날 보통 집에서 영화를 봐요.","私は休日、たいてい家で映画を見ます。"],["주말에 영화관에는 늘 사람들이 많아요.","週末、映画館にはいつも人が多いです。"]]},{"no":26,"kr":"배우다","pron":"","pos":"動","posCat":"verb","jp":"習う、学ぶ","ex":[["한국은 3학년 때부터 영어를 배웁니다.","韓国は3年生の時から英語を習います。"],["요즘 수영을 배우는 아이들이 많아요.","このごろ水泳を習う子どもが多いです。"]]},{"no":27,"kr":"같이","pron":"가치","pos":"副","posCat":"adv","jp":"一緒に、〜のように","ex":[["크리스마스에는 가족과 같이 보냅니다.","クリスマスには家族と一緒に過ごします。"],["에디슨같이 유명해지고 싶습니다.","エジソンのように有名になりたいです。"]]},{"no":28,"kr":"공부하다","pron":"","pos":"動","posCat":"verb","jp":"勉強する","ex":[["왜 한국어를 공부합니까?","なぜ韓国語を勉強しますか。"],["오늘은 바빠서 공부 못 해요.","今日は忙しくて勉強できません。"]]},{"no":29,"kr":"찾다","pron":"찯따","pos":"動","posCat":"verb","jp":"探す、（お金を）おろす","ex":[["은행에서 돈을 찾아요.","銀行でお金をおろします。"],["경찰서에 잃어버린 지갑을 찾으러 가요.","警察署に失くした財布を取りに行きます。"]]},{"no":30,"kr":"같다","pron":"갇따","pos":"形","posCat":"adj","jp":"同じだ、〜のようだ","ex":[["어머니와 나는 취미가 같습니다.","母と私は趣味が一緒です。"],["같은 문제가 나왔습니다.","同じ問題が出ました。"]]},{"no":31,"kr":"마시다","pron":"","pos":"動","posCat":"verb","jp":"飲む","ex":[["매일 아침 우유 한 잔을 마십니다.","毎朝、牛乳1杯を飲みます。"],["카페에서 커피를 마시고 있어요.","カフェでコーヒーを飲んでいます。"]]},{"no":32,"kr":"이야기하다","pron":"","pos":"動","posCat":"verb","jp":"話す、語る","ex":[["학교에 안 온 이유를 이야기했습니다.","学校に来なかった理由を話しました。"],["자신의 꿈을 이야기하는 시간입니다.","自分の夢を語る時間です。"]]},{"no":33,"kr":"읽다","pron":"익따","pos":"動","posCat":"verb","jp":"読む","ex":[["보통 저녁에 신문을 읽어요.","たいてい夜に新聞を読みます。"],["지금 읽는 책은 소설이에요.","今読んでいる本は小説です。"]]},{"no":34,"kr":"어떻다","pron":"어떠타","pos":"形","posCat":"adj","jp":"どうだ","ex":[["요즘 어떻습니까?","最近どうですか。"],["한국어 공부는 어때요?","韓国語の勉強はどうですか。"]]},{"no":35,"kr":"다음","pron":"","pos":"名","posCat":"noun","jp":"次、後","ex":[["초급 다음은 중급입니다.","初級の次は中級です。"],["한국어 수업 다음에 농구를 합니다.","韓国語の授業の後にバスケをします。"]]},{"no":36,"kr":"약속","pron":"약쏙","pos":"名","posCat":"noun","jp":"約束","ex":[["어제 약속이 있어서 집에 일찍 갔습니다.","昨日約束があったので家に早く帰りました。"],["친구와 다음 주에 만날 약속을 했어요.","友達と来週会う約束をしました。"]]},{"no":37,"kr":"음식","pron":"","pos":"名","posCat":"noun","jp":"食べ物、料理","ex":[["어떤 음식이 좋습니까?","どんな食べ物がいいですか。"],["내일 무슨 음식을 먹으러 갈까요?","明日、何の料理を食べに行きましょうか。"]]},{"no":38,"kr":"재미있다","pron":"재미읻따","pos":"形","posCat":"adj","jp":"面白い","ex":[["요즘 재미있는 영화는 뭐가 있어요?","最近おもしろい映画は何がありますか。"],["일본의 소설은 정말 재미있습니다.","日本の小説は本当におもしろいです。"]]},{"no":39,"kr":"식당","pron":"식땅","pos":"名","posCat":"noun","jp":"食堂、料理屋","ex":[["오늘은 학생 식당에서 밥을 먹읍시다.","今日は学生食堂でご飯を食べましょう。"],["저는 휴일에는 한식당에서 밥을 먹습니다.","私は休日には韓国料理屋でご飯を食べます。"]]},{"no":40,"kr":"보다","pron":"","pos":"動","posCat":"verb","jp":"見る","ex":[["일요일마다 영화를 봅니다.","毎週日曜日に映画を見ます。"],["지난 주에 본 드라마가 재미있었습니다.","先週見たドラマがおもしろかったです。"]]},{"no":41,"kr":"받다","pron":"받따","pos":"動","posCat":"verb","jp":"もらう、受ける","ex":[["꽃을 생일 선물로 받았어요.","花を誕生日プレゼントにもらいました。"],["손님이 불러서 주문을 받으러 갔어요.","お客さんが呼んだので注文を受けに行きました。"]]},{"no":42,"kr":"알다","pron":"","pos":"動","posCat":"verb","jp":"わかる、知る","ex":[["저는 한국어를 조금 압니다.","私は韓国語が少しわかります。"],["공항에서 아는 사람을 만났어요.","空港で知り合いに会いました。"]]},{"no":43,"kr":"만들다","pron":"","pos":"動","posCat":"verb","jp":"作る","ex":[["휴일에는 빵을 만들어 먹어요.","休日にはパンを作って食べます。"],["이 선물은 제가 직접 만든 거예요.","このプレゼントは私の手作りです。"]]},{"no":44,"kr":"작다","pron":"작따","pos":"形","posCat":"adj","jp":"小さい","ex":[["저는 키가 작습니다.","私は背が低いです。"],["옷이 작아서 좀 불편합니다.","服が小さくてちょっと不便です。"]]},{"no":45,"kr":"가게","pron":"","pos":"名","posCat":"noun","jp":"店","ex":[["가게에서 물건을 삽니다.","店で物を買います。"],["어떤 가게에 자주 가요?","どんな店によく行きますか。"]]},{"no":46,"kr":"공원","pron":"","pos":"名","posCat":"noun","jp":"公園","ex":[["한강공원에서 산책을 합니다.","漢江公園で散歩をします。"],["집 앞에 공원이 있어요.","家の前に公園があります。"]]},{"no":47,"kr":"물건","pron":"","pos":"名","posCat":"noun","jp":"物、品物","ex":[["가게에서 물건을 배달 시켰습니다.","お店から品物を配達させました。"],["백화점은 물건이 비쌉니다.","デパートは品物が高いです。"]]},{"no":48,"kr":"아프다","pron":"","pos":"形","posCat":"adj","jp":"痛い、（体調が）悪い","ex":[["배가 아파요.","お腹が痛いです。"],["넘어져서 너무 아파요.","転んでとても痛いです。"]]},{"no":49,"kr":"말","pron":"","pos":"名","posCat":"noun","jp":"言葉、話","ex":[["글을 읽고 ( )에 알맞은 말을 쓰십시오.","文を読んで( )に正しい言葉を書きなさい。"],["친구에게 약속 시간을 말했습니다.","友達に約束の時間を言いました。"]]},{"no":50,"kr":"방","pron":"","pos":"名","posCat":"noun","jp":"部屋","ex":[["방이 좁아서 이사를 할 겁니다.","部屋が狭くて引越しをするつもりです。"],["제 방은 5층에 있습니다.","私の部屋は5階にあります。"]]},{"no":51,"kr":"더","pron":"","pos":"副","posCat":"adv","jp":"もっと","ex":[["한국어를 더 잘하고 싶습니다.","韓国語がもっと上手になりたいです。"],["올 사람이 더 있어요?","来る人はもっといますか。"]]},{"no":52,"kr":"시장","pron":"","pos":"名","posCat":"noun","jp":"市場","ex":[["한국은 시장 물건이 더 싸요.","韓国は市場の品物がもっと安いです。"],["방학에 시장에서 일을 하고 싶습니다.","休みに市場で仕事をしたいです。"]]},{"no":53,"kr":"약국","pron":"약꾹","pos":"名","posCat":"noun","jp":"薬局","ex":[["아파서 약국에서 약을 샀어요.","具合が悪くて薬局で薬を買いました。"],["병원에 간 후에는 약국에 가야 합니다.","病院に行った後は薬局に行かなければなりません。"]]},{"no":54,"kr":"옷","pron":"옫","pos":"名","posCat":"noun","jp":"服","ex":[["저 옷은 얼마입니까?","あの服はいくらですか。"],["이 옷은 작은데 큰 거 없어요?","この服は小さいのですが大きいのはないですか。"]]},{"no":55,"kr":"백화점","pron":"배콰점","pos":"名","posCat":"noun","jp":"デパート、百貨店","ex":[["백화점은 병원 건너편에 있습니다.","デパートは病院の向かいにあります。"],["친구의 선물을 사러 백화점에 갑니다.","友達のプレゼントを買いにデパートに行きます。"]]},{"no":56,"kr":"아주","pron":"","pos":"副","posCat":"adv","jp":"とても","ex":[["한국 드라마가 아주 재미있습니다.","韓国ドラマがとてもおもしろいです。"],["음식이 맛있어서 아주 많이 먹었어요.","料理がおいしくてずいぶんたくさん食べました。"]]},{"no":57,"kr":"도서관","pron":"","pos":"名","posCat":"noun","jp":"図書館","ex":[["도서관에서 책을 빌립니다.","図書館で本を借ります。"],["도서관에 공부하러 갑니다.","図書館に勉強しに行きます。"]]},{"no":58,"kr":"보내다","pron":"","pos":"動","posCat":"verb","jp":"送る、過ごす","ex":[["친구에게 이메일을 보냅니다.","友達にEメールを送ります。"],["휴가는 해외에서 보낼 생각이에요.","休暇は海外で過ごすつもりです。"]]},{"no":59,"kr":"건너다","pron":"","pos":"動","posCat":"verb","jp":"渡る","ex":[["횡단보도를 건너면 서점이 있습니다.","横断歩道を渡ると書店があります。"],["육교를 건너세요.","歩道橋を渡ってください。"]]},{"no":60,"kr":"기다리다","pron":"","pos":"動","posCat":"verb","jp":"待つ","ex":[["영화관 앞에서 기다리겠습니다.","映画館の前でお待ちしております。"],["잠깐만 기다려 주세요.","少々お待ちください。"]]},{"no":61,"kr":"선물","pron":"","pos":"名","posCat":"noun","jp":"プレゼント、お土産","ex":[["친구가 저한테 선물을 줬어요.","友達が私にプレゼントをくれました。"],["아버지의 생신에 옷을 선물했습니다.","父の誕生日に服をプレゼントしました。"]]},{"no":62,"kr":"예쁘다","pron":"","pos":"形","posCat":"adj","jp":"きれいだ、かわいい","ex":[["예쁜 옷을 한 벌 사고 싶어요.","かわいい服を1着買いたいです。"],["그 사람은 배우같이 예쁩니다.","その人は俳優のようにきれいです。"]]},{"no":63,"kr":"자주","pron":"","pos":"副","posCat":"adv","jp":"しょっちゅう、たびたび、よく","ex":[["저는 자주 한국에 갑니다.","私はしょっちゅう韓国に行きます。"],["구두보다 운동화를 자주 신습니다.","靴より運動靴をよく履きます。"]]},{"no":64,"kr":"늦다","pron":"늗따","pos":"動","posCat":"verb","jp":"遅れる、（時間が）遅い","ex":[["약속 시간에 늦었어요.","約束の時間に遅れました。"],["늦은 시간까지 수고하셨습니다.","遅い時間までお疲れ様でした。"]]},{"no":65,"kr":"쉬다","pron":"","pos":"動","posCat":"verb","jp":"休む","ex":[["피곤해서 오늘은 쉬고 싶어요.","疲れているので今日は休みたいです。"],["다음 주 월요일은 쉬는 날입니다.","来週の月曜日は休みの日です。"]]},{"no":66,"kr":"입다","pron":"입따","pos":"動","posCat":"verb","jp":"着る","ex":[["빨간 원피스 입은 사람을 찾으세요.","赤いワンピースを着た人を探してください。"],["운동회에는 바지를 입고 오십시오.","運動会にはズボンを履いて来てください。"]]},{"no":67,"kr":"다니다","pron":"","pos":"動","posCat":"verb","jp":"通う","ex":[["요즘 수영장에 다닙니다.","最近、プールに通っています。"],["나중에 한국 회사에 다니고 싶습니다.","将来、韓国の会社に勤めたいです。"]]},{"no":68,"kr":"병원","pron":"","pos":"名","posCat":"noun","jp":"病院","ex":[["감기에 걸려서 병원에 갔습니다.","風邪をひいたので病院に行きました。"],["그 의사는 대학 병원에서 일합니다.","その医者は大学病院で働いています。"]]},{"no":69,"kr":"요즘","pron":"","pos":"名","posCat":"noun","jp":"最近、この頃、近ごろ","ex":[["요즘 극장에 오는 사람들이 많아졌습니다.","最近、映画館に来る人たちが多くなりました。"],["요즘 어떻게 지내요?","最近いかがお過ごしですか。"]]},{"no":70,"kr":"조금","pron":"","pos":"名/副","posCat":"noun","jp":"少し","ex":[["이 옷은 예쁜데 조금 비싸요.","この服はかわいいけど少し高いです。"],["조금씩 자주 먹는 게 건강에 좋아요.","少しずつ頻繁に食べるのが健康にいいです。"]]},{"no":71,"kr":"함께","pron":"","pos":"副","posCat":"adv","jp":"一緒に、共に","ex":[["저는 부모님과 함께 삽니다.","私は両親と一緒に住んでいます。"],["주말에 친구와 함께 여행을 갈 겁니다.","週末に友人と一緒に旅行に行く予定です。"]]},{"no":72,"kr":"맛있다","pron":"마딛따/마싣따","pos":"形","posCat":"adj","jp":"おいしい","ex":[["맛있는 케이크를 먹고 싶어요.","おいしいケーキを食べたいです。"],["음식이 싸고 맛있습니다.","食べ物が安くておいしいです。"]]},{"no":73,"kr":"편지","pron":"","pos":"名","posCat":"noun","jp":"手紙","ex":[["오랜만에 선생님께 편지를 보냈습니다.","久しぶりに先生に手紙を送りました。"],["저는 기분이 좋으면 편지를 씁니다.","私は気分がよければ手紙を書きます。"]]},{"no":74,"kr":"은행","pron":"","pos":"名","posCat":"noun","jp":"銀行","ex":[["은행에 돈을 찾으러 갑니다.","銀行にお金をおろしに行きます。"],["돈을 은행 계좌로 보내 주세요.","お金を銀行口座に送ってください。"]]},{"no":75,"kr":"사진","pron":"","pos":"名","posCat":"noun","jp":"写真","ex":[["제 취미는 사진 찍기입니다.","私の趣味は写真を撮ることです。"],["파티에서 찍은 사진을 친구에게 줬습니다.","パーティで撮った写真を友達にあげました。"]]},{"no":76,"kr":"취미","pron":"","pos":"名","posCat":"noun","jp":"趣味","ex":[["영화 보는 것이 취미입니다.","映画を見るのが趣味です。"],["쇼핑이 취미인 사람들이 많습니다.","ショッピングが趣味な人が多いです。"]]},{"no":77,"kr":"바쁘다","pron":"","pos":"形","posCat":"adj","jp":"忙しい","ex":[["일이 너무 많고 바쁩니다.","仕事が多すぎて忙しいです。"],["내일은 바빠서 만날 수 없어요.","明日は忙しくて会えません。"]]},{"no":78,"kr":"청소하다","pron":"","pos":"動","posCat":"verb","jp":"掃除する","ex":[["주말에는 보통 집을 청소합니다.","週末には、たいてい家を掃除します。"],["손님이 와서 청소해야 해요.","お客様が来るので掃除しなければなりません。"]]},{"no":79,"kr":"듣다","pron":"듣따","pos":"動","posCat":"verb","jp":"聞く","ex":[["저는 한국 음악을 자주 듣습니다.","私は韓国の音楽をよく聞きます。"],["뉴스에서 들은 얘기를 친구에게 했어요.","ニュースで聞いた話を友達にしました。"]]},{"no":80,"kr":"안내하다","pron":"","pos":"動","posCat":"verb","jp":"案内する","ex":[["외국인에게 관광지를 안내했어요.","外国人に観光地を案内しました。"],["교통 상황을 안내하고 있습니다.","交通状況を案内しています。"]]},{"no":81,"kr":"걸리다","pron":"","pos":"動","posCat":"verb","jp":"かかる","ex":[["감기에 걸려서 회사를 쉬었어요.","風邪をひいたので会社を休みました。"],["길이 막혀서 시간이 많이 걸렸어요.","道が混んでいて時間がずいぶんかかりました。"]]},{"no":82,"kr":"비싸다","pron":"","pos":"形","posCat":"adj","jp":"（値段が）高い、高価だ","ex":[["이 가게는 물건 값이 비쌉니다.","この店は品物の値段が高いです。"],["비싸지만 서비스가 좋아서 마음에 들어요.","高いけどサービスがいいので気に入っています。"]]},{"no":83,"kr":"싸다","pron":"","pos":"形","posCat":"adj","jp":"安い","ex":[["택시보다 버스가 싸요.","タクシーよりバスが安いです。"],["백화점은 비싼데 시장은 싸요.","デパートは高いけれど市場は安いです。"]]},{"no":84,"kr":"빨리","pron":"","pos":"副","posCat":"adv","jp":"速く、早く","ex":[["모두 기다리니까 빨리 오세요.","皆待ってるから早く来てください。"],["일을 하면 시간이 빨리 지나갑니다.","仕事をすると時間が早く過ぎていきます。"]]},{"no":85,"kr":"장소","pron":"","pos":"名","posCat":"noun","jp":"場所","ex":[["약속 장소에 일찍 나갑니다.","約束の場所に早く出かけます。"],["회의 장소는 어디입니까?","会議の場所はどこですか。"]]},{"no":86,"kr":"가르치다","pron":"","pos":"動","posCat":"verb","jp":"教える","ex":[["한국에서 일어를 가르치고 있어요.","韓国で日本語を教えています。"],["친구가 컴퓨터를 가르쳐 주기로 했습니다.","友達がパソコンを教えてくれることになりました。"]]},{"no":87,"kr":"시작하다","pron":"시자카다","pos":"動","posCat":"verb","jp":"始める","ex":[["공연은 오후 2시에 시작합니다.","公演は午後2時に始めます。"],["3년 전에 운동을 시작했습니다.","3年前に運動を始めました。"]]},{"no":88,"kr":"치다","pron":"","pos":"動","posCat":"verb","jp":"打つ、（楽器を）弾く","ex":[["주말에는 보통 골프를 칩니다.","週末には、たいていゴルフをします。"],["기타를 칠 수 있으면 좋겠어요.","ギターが弾けたらいいですね。"]]},{"no":89,"kr":"지하철","pron":"","pos":"名","posCat":"noun","jp":"地下鉄","ex":[["우리 집은 지하철역에서 가까워요.","私の家は地下鉄駅から近いです。"],["버스보다 지하철이 빠르고 편합니다.","バスより地下鉄が速くて楽です。"]]},{"no":90,"kr":"가지다","pron":"","pos":"動","posCat":"verb","jp":"持つ","ex":[["더울 테니까 물을 가지고 오세요.","暑いだろうから水を持ってきてください。"],["같은 취미를 가진 사람을 만났어요.","同じ趣味を持つ人に会いました。"]]},{"no":91,"kr":"길","pron":"","pos":"名","posCat":"noun","jp":"道","ex":[["길이 많이 막혀서 늦었어요.","道がかなり混んでいて遅れました。"],["남자는 길을 묻고 있습니다.","男は道を尋ねています。"]]},{"no":92,"kr":"다른","pron":"","pos":"冠/形","posCat":"det","jp":"違う、ほか（別）の","ex":[["다른 색은 없어요?","ほかの色はないですか。"],["나중에 지금하고 다른 일을 하고 싶어요.","将来は今と違う仕事をしたいです。"]]},{"no":93,"kr":"꽃","pron":"꼳","pos":"名","posCat":"noun","jp":"花","ex":[["꽃이 예뻐요.","花がきれいです。"],["꽃이 피면 꽃놀이를 합니다.","花が咲いたらお花見をします。"]]},{"no":94,"kr":"너무","pron":"","pos":"副","posCat":"adv","jp":"あまり、とても","ex":[["길이 너무 복잡해요.","道が複雑すぎます。"],["오늘은 밥을 너무 많이 먹었어요.","今日はご飯をいっぱい食べすぎました。"]]},{"no":95,"kr":"생일","pron":"","pos":"名","posCat":"noun","jp":"誕生日","ex":[["저녁에 친구의 생일 파티에 갑니다.","夕方、友達の誕生日パーティに行きます。"],["생일 축하 노래도 부를 겁니다.","誕生日のお祝いの歌も歌う予定です。"]]},{"no":96,"kr":"서점","pron":"","pos":"名","posCat":"noun","jp":"書店、本屋","ex":[["책을 사러 서점에 갑니다.","本を買いに書店に行きます。"],["가끔 서점에서 책을 읽습니다.","たまに本屋で本を読みます。"]]},{"no":97,"kr":"수영","pron":"","pos":"名","posCat":"noun","jp":"水泳","ex":[["바다에서 수영을 해요.","海で水泳をします。"],["수영장에서 우연히 수영 선수를 봤어요.","プールで偶然、水泳選手を見かけました。"]]},{"no":98,"kr":"이사","pron":"","pos":"名","posCat":"noun","jp":"引っ越し","ex":[["저는 학교 근처로 이사를 하고 싶어요.","私は学校の近くへ引越しをしたいです。"],["친구가 이사를 도와주었습니다.","友達が引越しを手伝ってくれました。"]]},{"no":99,"kr":"준비","pron":"","pos":"名","posCat":"noun","jp":"準備","ex":[["오늘은 여행 준비를 해야 합니다.","今日は旅行の準備をしなければなりません。"],["시험 준비로 바쁩니다.","試験の準備で忙しいです。"]]},{"no":100,"kr":"빌리다","pron":"","pos":"動","posCat":"verb","jp":"借りる","ex":[["학교에서 책을 무료로 빌릴 수 있습니다.","学校で本をタダで借りられます。"],["지우개를 빌려주세요.","消しゴムを貸してください。"]]},{"no":101,"kr":"인사","pron":"","pos":"名","posCat":"noun","jp":"あいさつ","ex":[["인사를 잘 하는 사람이 좋습니다.","あいさつがよくできる人がいいです。"],["항상 밝게 인사를 합니다.","いつも明るくあいさつをします。"]]},{"no":102,"kr":"가깝다","pron":"가깝따","pos":"形","posCat":"adj","jp":"近い","ex":[["지하철역에서 집까지 가까워요.","地下鉄駅から家まで近いです。"],["가까운 곳에 슈퍼마켓이 있습니다.","近場にスーパーがあります。"]]},{"no":103,"kr":"고향","pron":"","pos":"名","posCat":"noun","jp":"故郷、ふるさと","ex":[["제 고향은 서울입니다.","私の故郷はソウルです。"],["고향에서 여름 휴가를 보낼 겁니다.","故郷で夏期休暇を過ごす予定です。"]]},{"no":104,"kr":"공항","pron":"","pos":"名","posCat":"noun","jp":"空港","ex":[["비행기를 타러 공항에 갑니다.","飛行機に乗りに空港へ行きます。"],["공항에서 짐을 부쳐야 합니다.","空港で荷物を預けなければなりません。"]]},{"no":105,"kr":"괜찮다","pron":"괜찬타","pos":"形","posCat":"adj","jp":"大丈夫だ","ex":[["다음 주에 여행 가고 싶은데 괜찮아요?","来週、旅行に行きたいのですが大丈夫ですか。"],["괜찮은 사람이 있으면 소개해 주세요.","いい人がいたら紹介してください。"]]},{"no":106,"kr":"노래","pron":"","pos":"名","posCat":"noun","jp":"歌","ex":[["술을 마시고 노래방에 갑니다.","お酒を飲んでカラオケに行きます。"],["노래방에서 노래를 부릅니다.","カラオケで歌を歌います。"]]},{"no":107,"kr":"우체국","pron":"","pos":"名","posCat":"noun","jp":"郵便局","ex":[["우체국에 소포를 보내러 갑니다.","郵便局に小包を送りに行きます。"],["우표는 우체국에서 사십시오.","切手は郵便局で買ってください。"]]},{"no":108,"kr":"건강하다","pron":"","pos":"形","posCat":"adj","jp":"健康だ、元気だ","ex":[["부모님은 건강합니다.","両親は元気です。"],["건강에 관심이 많습니다.","健康に関心が高いです。"]]},{"no":109,"kr":"사과","pron":"","pos":"名","posCat":"noun","jp":"りんご","ex":[["과일 가게에서 사과를 샀습니다.","果物屋でリンゴを買いました。"],["누나는 사과와 배를 좋아합니다.","姉はリンゴとナシが好きです。"]]},{"no":110,"kr":"사무실","pron":"","pos":"名","posCat":"noun","jp":"事務室","ex":[["사무실은 7층에 있습니다.","事務室は7階にあります。"],["오늘 사무실에 다녀왔습니다.","今日、事務室に行ってきました。"]]},{"no":111,"kr":"아직","pron":"","pos":"副","posCat":"adv","jp":"まだ","ex":[["아직 점심을 안 먹었습니다.","まだ昼食を食べていません。"],["아직 메일을 쓰고 있습니다.","まだメールを書いています。"]]},{"no":112,"kr":"일찍","pron":"","pos":"副","posCat":"adv","jp":"早く、早めに","ex":[["저는 아침 일찍 일어나요.","私は早起きです。"],["오늘은 피곤해서 집에 일찍 가고 싶어요.","今日は疲れてるので家に早く帰りたいです。"]]},{"no":113,"kr":"구두","pron":"","pos":"名","posCat":"noun","jp":"靴","ex":[["굽이 높은 구두를 신고 등산하지 마세요.","かかとが高い靴を履いて登山しないでください。"],["그 원피스에는 다른 구두가 어울립니다.","そのワンピースには別の靴が似合います。"]]},{"no":114,"kr":"근처","pron":"","pos":"名","posCat":"noun","jp":"近所","ex":[["우리 집 근처에 병원이 있습니다.","わが家の近所に病院があります。"],["회사 근처에 맛있는 식당이 있어요?","会社の近くにおいしい食堂がありますか。"]]},{"no":115,"kr":"소개","pron":"","pos":"名","posCat":"noun","jp":"紹介","ex":[["반 친구들이 자기 소개를 하고 있습니다.","クラスメートが自己紹介をしています。"],["사장님이 회사를 소개할 겁니다.","社長が会社を紹介する予定です。"]]},{"no":116,"kr":"자다","pron":"","pos":"動","posCat":"verb","jp":"寝る","ex":[["수업 시간에 자지 마십시오.","授業時に寝ないでください。"],["저는 보통 12시에 잠을 잡니다.","私は普段12時に寝ます。"]]},{"no":117,"kr":"극장","pron":"극짱","pos":"名","posCat":"noun","jp":"劇場、映画館","ex":[["영화를 보러 극장에 갑니다.","映画を見に映画館に行きます。"],["그 극장에서 좋아하는 영화를 합니다.","その劇場で好きな映画をやります。"]]},{"no":118,"kr":"끝나다","pron":"끈나다","pos":"動","posCat":"verb","jp":"終わる","ex":[["수업은 20분 후에 끝납니다.","授業は20分後に終わります。"],["끝나는 시간이 언제입니까?","終わる時間はいつですか。"]]},{"no":119,"kr":"돈","pron":"","pos":"名","posCat":"noun","jp":"お金","ex":[["돈을 모아서 해외 여행을 갈 거예요.","お金を貯めて海外旅行に行くつもりです。"],["은행에 가서 부모님에게 돈을 보냈습니다.","銀行に行って両親にお金を送りました。"]]},{"no":120,"kr":"들어가다","pron":"드러가다","pos":"動","posCat":"verb","jp":"入る、入っていく","ex":[["수업이 시작되면 모두 교실에 들어가요.","授業が始まると皆教室に入ります。"],["음식을 가지고 들어가면 안 됩니다.","食べ物を持って入ってはいけません。"]]},{"no":121,"kr":"바꾸다","pron":"","pos":"動","posCat":"verb","jp":"変える、切り替える","ex":[["치마를 바지로 바꿨습니다.","スカートをズボンに替えました。"],["다나카 씨 좀 바꿔 주세요.","田中さんに替わってください。"]]},{"no":122,"kr":"생활","pron":"","pos":"名","posCat":"noun","jp":"生活","ex":[["요즘 한국 생활이 어때요?","最近、韓国の生活はどうですか。"],["처음보다 유학 생활이 즐겁습니다.","初めより留学の生活が楽しいです。"]]},{"no":123,"kr":"신문","pron":"","pos":"名","posCat":"noun","jp":"新聞","ex":[["어머니는 매일 신문을 읽습니다.","母は毎日新聞を読みます。"],["버스에서 신문을 읽는 사람도 있어요.","バスで新聞を読む人もいます。"]]},{"no":124,"kr":"모자","pron":"","pos":"名","posCat":"noun","jp":"帽子","ex":[["외출할 때는 모자를 쓰세요.","外出する時は帽子をかぶってください。"],["모자를 벗고 인사를 합니다.","帽子を脱いであいさつをします。"]]},{"no":125,"kr":"생각","pron":"","pos":"名","posCat":"noun","jp":"考え、つもり","ex":[["여행을 가면 많은 생각을 합니다.","旅行に行くといろいろなことを考えます。"],["저는 다음 주에 한국에 갈 생각입니다.","私は来週韓国に行くつもりです。"]]},{"no":126,"kr":"이름","pron":"","pos":"名","posCat":"noun","jp":"名前","ex":[["이름이 무엇입니까?","お名前は何ですか。"],["시장에서 물건 이름을 배울 수 있어요.","市場で品物の名前を学ぶことができます。"]]},{"no":127,"kr":"팔다","pron":"","pos":"動","posCat":"verb","jp":"売る","ex":[["아침에는 영화표를 싸게 팝니다.","朝は映画のチケットを安く売っています。"],["전자 제품을 파는 가게가 어디에 많아요?","電化製品を売っている店はどこに多いですか。"]]},{"no":128,"kr":"다시","pron":"","pos":"副","posCat":"adv","jp":"再び、また","ex":[["더우면 에어컨을 다시 켤까요?","暑かったらエアコンをまたつけましょうか。"],["다시 한 번만 말씀해 주세요.","もう一度だけおっしゃってください。"]]},{"no":129,"kr":"일하다","pron":"","pos":"動","posCat":"verb","jp":"働く、仕事する","ex":[["저는 한국 회사에서 일합니다.","私は韓国の会社で働いています。"],["일요일에도 일하러 가요?","日曜日にも仕事しに行きますか。"]]},{"no":130,"kr":"정말","pron":"","pos":"副/名","posCat":"adv","jp":"本当に","ex":[["첫월급을 받고 정말 기뻤습니다.","初任給をもらって本当にうれしかったです。"],["그 신문 기사가 정말입니까?","その新聞記事は本当ですか。"]]},{"no":131,"kr":"걷다","pron":"걷따","pos":"動","posCat":"verb","jp":"歩く","ex":[["매일 아침 30분씩 공원을 걷습니다.","毎朝30分ずつ公園を歩きます。"],["역에서 집까지 걸어서 갑니다.","駅から家まで歩いていきます。"]]},{"no":132,"kr":"구경하다","pron":"","pos":"動","posCat":"verb","jp":"見物する、観覧する","ex":[["동물원에서 판다를 구경합니다.","動物園でパンダを見物します。"],["그림을 구경하는 사람이 많아요.","絵を観覧する人が多いです。"]]},{"no":133,"kr":"쉽다","pron":"쉽따","pos":"形","posCat":"adj","jp":"易しい、簡単だ","ex":[["이번 시험은 쉬웠습니다.","今回の試験は易しかったです。"],["쉬운 문제들이 나왔습니다.","簡単な問題が出ました。"]]},{"no":134,"kr":"시험","pron":"","pos":"名","posCat":"noun","jp":"試験、テスト","ex":[["다음 주에 한국어 시험이 있습니다.","来週、韓国語の試験があります。"],["우리 반은 매주 단어 시험을 봅니다.","うちのクラスは毎週単語テストを受けます。"]]},{"no":135,"kr":"어렵다","pron":"어렵따","pos":"形","posCat":"adj","jp":"難しい","ex":[["한국어는 어렵지만 재미있습니다.","韓国語は難しいけどおもしろいです。"],["한국어에는 어려운 발음이 있습니다.","韓国語には難しい発音があります。"]]},{"no":136,"kr":"우산","pron":"","pos":"名","posCat":"noun","jp":"傘","ex":[["비가 와서 우산을 썼어요.","雨が降ったので傘をさしました。"],["친구에게 우산을 빌렸어요.","友達に傘を借りました。"]]},{"no":137,"kr":"일어나다","pron":"이러나다","pos":"動","posCat":"verb","jp":"起きる、立ち上がる","ex":[["아침 6시에 일어나요.","朝6時に起きます。"],["늦게 일어나서 회사에 지각했어요.","遅く起きたので会社に遅刻しました。"]]},{"no":138,"kr":"찍다","pron":"찍따","pos":"動","posCat":"verb","jp":"（写真を）撮る","ex":[["우리 반 친구들과 같이 사진을 찍었어요.","うちのクラスメートと一緒に写真を撮りました。"],["박물관에서 사진을 찍어도 됩니까?","博物館で写真を撮ってもいいですか。"]]},{"no":139,"kr":"힘들다","pron":"","pos":"形","posCat":"adj","jp":"大変だ、つらい","ex":[["좋은 사람을 찾기가 힘듭니다.","いい(すばらしい)人を探すのが大変です。"],["이번 주는 힘든 일이 많았어요.","今週は大変な仕事が多かったです。"]]},{"no":140,"kr":"먼저","pron":"","pos":"副","posCat":"adv","jp":"先に、まず","ex":[["아파서 먼저 집에 돌아갔어요.","具合が悪くて先に家に帰りました。"],["식사하기 전에 먼저 손을 씻으세요.","食事の前にまず手を洗ってください。"]]},{"no":141,"kr":"모르다","pron":"","pos":"動","posCat":"verb","jp":"わからない、知らない","ex":[["한국말을 몰라요.","韓国語がわかりません。"],["모르는 사람이에요.","知らない人です。"]]},{"no":142,"kr":"계획","pron":"계획/게획","pos":"名","posCat":"noun","jp":"計画、予定","ex":[["올해 계획을 세웁니다.","今年の計画を立てます。"],["오늘은 친구를 만날 계획이에요.","今日は友達に会う予定です。"]]},{"no":143,"kr":"바다","pron":"","pos":"名","posCat":"noun","jp":"海","ex":[["여름에는 바다에서 수영을 해요.","夏は海で水泳をします。"],["제주도는 바다와 산이 있어서 좋아요.","済州島は海と山があるのでいいです。"]]},{"no":144,"kr":"알리다","pron":"","pos":"動","posCat":"verb","jp":"知らせる","ex":[["여러분께 알려 드립니다.","皆さんにお知らせいたします。"],["남자가 길을 알려 주고 있습니다.","男の人が道を教えてあげています。"]]},{"no":145,"kr":"책상","pron":"책쌍","pos":"名","posCat":"noun","jp":"机","ex":[["책상에 앉아서 공부를 합니다.","机に向かって勉強をします。"],["책상 위에 책이 있습니다.","机の上に本があります。"]]},{"no":146,"kr":"꼭","pron":"","pos":"副","posCat":"adv","jp":"必ず、ぜひ","ex":[["다음 주 공연에는 꼭 갈게요.","来週の公演には必ず行きます。"],["올해는 꼭 운전면허증을 따고 싶습니다.","今年は必ず運転免許を取りたいです。"]]},{"no":147,"kr":"대하다","pron":"","pos":"動","posCat":"verb","jp":"対する、〜について","ex":[["취미에 대한 이야기를 하십시오.","趣味についての話をしてください。"],["한국어를 공부하는 이유에 대해 쓰십시오.","韓国語を勉強する理由について書いてください。"]]},{"no":148,"kr":"등산","pron":"","pos":"名","posCat":"noun","jp":"登山","ex":[["일요일에 친구들과 등산을 했습니다.","日曜日に友達と登山をしました。"],["등산복과 등산화를 사러 갈 거예요.","登山服と登山靴を買いに行く予定です。"]]},{"no":149,"kr":"박물관","pron":"방물관","pos":"名","posCat":"noun","jp":"博物館","ex":[["박물관에서는 사진을 찍으면 안 돼요.","博物館では写真を撮ってはいけません。"],["박물관에 가면 역사를 알 수 있어요.","博物館に行くと歴史がわかります。"]]},{"no":150,"kr":"방학","pron":"","pos":"名","posCat":"noun","jp":"（学校の）休み","ex":[["이번 방학에는 일본에 여행을 갈 거예요.","今度の休みは日本へ旅行に行く予定です。"],["여름 방학에 아르바이트를 했습니다.","夏休みにバイトをしました。"]]},{"no":151,"kr":"차","pron":"","pos":"名","posCat":"noun","jp":"お茶、車","ex":[["밥을 먹은 후에는 차를 마십니다.","ご飯を食べた後にはお茶を飲みます。"],["이 카페는 커피도 차도 맛있어요.","このカフェはコーヒーもお茶もおいしいです。"]]},{"no":152,"kr":"기분","pron":"","pos":"名","posCat":"noun","jp":"気分、機嫌","ex":[["어제 친구와 싸워서 기분이 안 좋습니다.","昨日、友達と喧嘩したので機嫌がよくありません。"],["운동을 한 후에는 기분이 좋습니다.","運動をした後は気分がいいです。"]]},{"no":153,"kr":"나오다","pron":"","pos":"動","posCat":"verb","jp":"出る、出てくる","ex":[["수업 후에 학생들이 교실에서 나왔어요.","授業後に学生たちが教室から出てきました。"],["시험에 나온 단어는 안 배운 게 많네요.","試験に出た単語は習っていないものが多いですね。"]]},{"no":154,"kr":"모두","pron":"","pos":"副/名","posCat":"adv","jp":"すべて、皆","ex":[["숙제를 모두 다 했습니다.","宿題をすべてやりました。"],["사무실에 직원들이 모두 출근했어요.","事務室に職員たちが皆出勤しました。"]]},{"no":155,"kr":"다","pron":"","pos":"副","posCat":"adv","jp":"皆、全部","ex":[["우리 반 학생들은 다 일본 사람입니다.","うちのクラスの学生たちは皆日本人です。"],["오늘 숙제는 오늘 다 할 생각입니다.","今日の宿題は今日全部やるつもりです。"]]},{"no":156,"kr":"지나다","pron":"","pos":"動","posCat":"verb","jp":"経つ、過ぎる","ex":[["시간이 지나면 괜찮을 겁니다.","時間が経てば大丈夫でしょう。"],["겨울이 지나고 봄이 왔습니다.","冬が過ぎて春が来ました。"]]},{"no":157,"kr":"출발하다","pron":"","pos":"動","posCat":"verb","jp":"出発する","ex":[["여행은 내일 6시에 출발합니다.","旅行は明日6時に出発します。"],["이 버스는 곧 출발할 겁니다.","このバスは間もなく出発します。"]]},{"no":158,"kr":"도와주다","pron":"","pos":"動","posCat":"verb","jp":"助けてあげる/くれる、手伝う","ex":[["친구가 이사를 해서 도와줬습니다.","友達が引越しをするので手伝いました。"],["힘들 때 도와준 사람에게 인사를 했어요.","大変な時助けてくれた人にお礼を言いました。"]]},{"no":159,"kr":"운전하다","pron":"","pos":"動","posCat":"verb","jp":"運転する","ex":[["운전하고 싶어서 운전면허를 땄어요.","運転したくて運転免許を取りました。"],["운전할 때는 전화를 받지 마세요.","運転している時は電話に出ないでください。"]]},{"no":160,"kr":"주다","pron":"","pos":"動","posCat":"verb","jp":"あげる、与える、くれる","ex":[["시험을 잘 본 학생에게 컴퓨터를 줍니다.","テストがよかった学生にパソコンをあげます。"],["언니가 저에게 스키를 가르쳐 줍니다.","姉が私にスキーを教えてくれます。"]]},{"no":161,"kr":"지갑","pron":"","pos":"名","posCat":"noun","jp":"財布","ex":[["지하철에서 지갑을 잃어버렸어요.","地下鉄で財布を失くしました。"],["지갑에서 돈을 꺼내요.","財布からお金を取り出します。"]]},{"no":162,"kr":"지내다","pron":"","pos":"動","posCat":"verb","jp":"過ごす、暮らす","ex":[["반 친구들과 친하게 지내고 싶어요.","クラスメートと親しく過ごしたいです。"],["요즘 어떻게 지내세요?","最近、いかがお過ごしですか。"]]},{"no":163,"kr":"초대","pron":"","pos":"名","posCat":"noun","jp":"招待","ex":[["피아노 공연에 초대를 받았습니다.","ピアノの公演に招待されました。"],["친구를 집에 초대해서 파티를 했습니다.","友達を家に招待してパーティをしました。"]]},{"no":164,"kr":"내리다","pron":"","pos":"動","posCat":"verb","jp":"降りる、降る","ex":[["장마철에는 비가 많이 내려요.","梅雨時は雨がたくさん降ります。"],["다음에 내리실 분은 버튼을 누르세요.","次にお降りの方はボタンを押してください。"]]},{"no":165,"kr":"돌아가다","pron":"도라가다","pos":"動","posCat":"verb","jp":"帰っていく、戻る","ex":[["이번 방학에는 고향에 돌아갈 거예요.","今回の休みには故郷に帰る予定です。"],["부장님은 조금 전에 자리로 돌아가셨어요.","部長は少し前に席へお戻りになりました。"]]},{"no":166,"kr":"사전","pron":"","pos":"名","posCat":"noun","jp":"辞書","ex":[["모르는 단어가 있으면 사전을 찾으세요.","知らない単語があれば辞書を引いてください。"],["사전은 서점에서 팔아요.","辞書は書店で売っています。"]]},{"no":167,"kr":"방송","pron":"","pos":"名","posCat":"noun","jp":"放送","ex":[["저는 음악 방송을 자주 듣습니다.","私は音楽放送(番組)をしょっちゅう聴きます。"],["이 프로그램은 언제 방송해요?","この番組はいつ放送しますか。"]]},{"no":168,"kr":"부탁하다","pron":"부타카다","pos":"動","posCat":"verb","jp":"頼む、願う","ex":[["어려운 일 있으면 언제든지 부탁하세요.","困ったことがあればいつでも頼んでください。"],["안내를 부탁한 사람에게 연락이 왔어요.","案内を頼んだ人から連絡が来ました。"]]},{"no":169,"kr":"언제나","pron":"","pos":"副","posCat":"adv","jp":"いつも","ex":[["저는 언제나 음악을 들으면서 공부해요.","私はいつも音楽を聴きながら勉強します。"],["그 친구는 언제나 약속 시간에 늦어요.","その友人はいつも約束の時間に遅れます。"]]},{"no":170,"kr":"열심히","pron":"열씸히","pos":"副","posCat":"adv","jp":"熱心に、一生懸命に","ex":[["지금 열심히 노래 연습을 하고 있습니다.","今、熱心に歌の練習をしています。"],["의사가 되려고 열심히 공부를 합니다.","医者になろうと一生懸命に勉強をします。"]]},{"no":171,"kr":"이용하다","pron":"","pos":"動","posCat":"verb","jp":"利用する","ex":[["지하철을 이용하는 것이 빠릅니다.","地下鉄を利用するのが早いです。"],["회원이면 누구든지 이용할 수 있습니다.","会員ならば誰でも利用できます。"]]},{"no":172,"kr":"나이","pron":"","pos":"名","posCat":"noun","jp":"年、年齢","ex":[["누가 나이가 많아요?","誰が年上ですか。"],["나이가 어떻게 돼요?","おいくつになりますか。"]]},{"no":173,"kr":"바지","pron":"","pos":"名","posCat":"noun","jp":"ズボン","ex":[["이 바지는 너무 길어요.","このズボンはあまりに長いです。"],["오늘 모임에는 바지를 입는 게 좋겠어요.","今日の集まりにはズボンを履くのがよさそうです。"]]},{"no":174,"kr":"천천히","pron":"","pos":"副","posCat":"adv","jp":"ゆっくり","ex":[["천천히 말씀해 주세요.","ゆっくりおっしゃってください。"],["저는 다른 사람보다 밥을 천천히 먹어요.","私はほかの人よりご飯をゆっくり食べます。"]]},{"no":175,"kr":"그림","pron":"","pos":"名","posCat":"noun","jp":"絵","ex":[["저 그림은 무슨 그림입니까?","あの絵は何の絵ですか。"],["화가는 그림을 그리는 사람입니다.","画家は絵を描く人です。"]]},{"no":176,"kr":"나무","pron":"","pos":"名","posCat":"noun","jp":"木","ex":[["공원에는 나무와 꽃이 많습니다.","公園には木と花が多いです。"],["나무 아래에서 책 읽는 것을 좋아합니다.","木の下で本を読むのが好きです。"]]},{"no":177,"kr":"놀다","pron":"","pos":"動","posCat":"verb","jp":"遊ぶ、休む","ex":[["어제 디즈니랜드에서 여동생과 놀았어요.","昨日ディズニーランドで妹と遊びました。"],["노는 날인데 일이 바빠서 출근했어요.","休日なのに仕事が忙しくて出勤しました。"]]},{"no":178,"kr":"앉다","pron":"안따","pos":"動","posCat":"verb","jp":"座る","ex":[["오늘은 버스에서 앉아서 왔어요.","今日はバスで座って来ました。"],["선생님, 여기에 앉으세요.","先生、ここに座ってください。"]]},{"no":179,"kr":"예약하다","pron":"예야카다","pos":"動","posCat":"verb","jp":"予約する","ex":[["공연을 예약하고 싶습니다.","公演を予約したいです。"],["식당은 언제까지 예약해야 합니까?","レストランはいつまでに予約しなければいけませんか。"]]},{"no":180,"kr":"덥다","pron":"덥따","pos":"形","posCat":"adj","jp":"暑い","ex":[["한국의 여름은 덥고 비도 많이 옵니다.","韓国の夏は暑く雨もたくさん降ります。"],["밖은 더운데 안은 시원합니다.","外は暑いのに中は涼しいです。"]]},{"no":181,"kr":"멀다","pron":"","pos":"形","posCat":"adj","jp":"遠い","ex":[["집에서 역까지 멀어요.","家から駅まで遠いです。"],["먼 곳으로 여행을 가고 싶어요.","遠い所へ旅行に行きたいです。"]]},{"no":182,"kr":"보이다","pron":"","pos":"動","posCat":"verb","jp":"見える","ex":[["날씨가 좋아서 후지산이 잘 보여요.","天気がよくて富士山がよく見えます。"],["바다가 보이는 방으로 예약해 주세요.","海が見える部屋で予約してください。"]]},{"no":183,"kr":"부르다","pron":"","pos":"動","posCat":"verb","jp":"呼ぶ、歌う","ex":[["생일 파티에 친구를 불렀어요.","誕生日パーティに友達を呼びました。"],["밥을 많이 먹어서 배가 불러요.","ご飯をたくさん食べたのでお腹がいっぱいです。"]]},{"no":184,"kr":"사용하다","pron":"","pos":"動","posCat":"verb","jp":"使用する","ex":[["저는 컴퓨터를 사용해서 공부합니다.","私はパソコンを使って勉強します。"],["여기에서는 휴대 전화를 사용하지 못해요.","ここでは携帯電話が使えません。"]]},{"no":185,"kr":"역사","pron":"역싸","pos":"名","posCat":"noun","jp":"歴史","ex":[["역사를 공부하러 경주에 가요.","歴史を勉強しに慶州に行きます。"],["저는 역사 소설을 좋아합니다.","私は歴史小説が好きです。"]]},{"no":186,"kr":"잠","pron":"","pos":"名","posCat":"noun","jp":"睡眠、寝ること","ex":[["요즘 잠이 잘 안 와요.","最近よく眠れません。"],["어제는 피곤해서 일찍 잠을 잤어요.","昨日は疲れて早く寝ました。"]]},{"no":187,"kr":"내용","pron":"","pos":"名","posCat":"noun","jp":"内容","ex":[["오늘 회의 내용은 무엇입니까?","今日の会議の内容は何ですか。"],["내용을 꼭 확인한 후에 보내세요.","内容を必ず確認した後に送ってください。"]]},{"no":188,"kr":"도착하다","pron":"도차카다","pos":"動","posCat":"verb","jp":"到着する、着く","ex":[["교실에 언제 도착했어요?","教室にいつ到着しましたか。"],["아직 비행기가 공항에 도착 안 했습니다.","まだ飛行機が空港に到着していません。"]]},{"no":189,"kr":"마음","pron":"","pos":"名","posCat":"noun","jp":"心、気持ち","ex":[["강아지가 다쳐서 마음이 아파요.","子犬が怪我したので心が痛みます。"],["디자인은 마음에 들지만 색이 싫어요.","デザインは気に入ってるけど色が嫌です。"]]},{"no":190,"kr":"모임","pron":"","pos":"名","posCat":"noun","jp":"集まり、集会","ex":[["오늘 저녁 모임에는 사장님도 오십니다.","今晩の集まりには社長もいらっしゃいます。"],["감기에 걸려서 이번 모임에 못 가요.","風邪をひいたので今度の集まりに行けません。"]]},{"no":191,"kr":"바라다","pron":"","pos":"動","posCat":"verb","jp":"望む、願う","ex":[["시험에 꼭 합격하기 바라요.","試験に必ず合格することを願っています。"],["바라는 것은 모두 이루어질 겁니다.","望みはすべて叶うでしょう。"]]},{"no":192,"kr":"잠깐","pron":"","pos":"副/名","posCat":"adv","jp":"ちょっと、しばらく","ex":[["사장님은 잠깐 나가셨어요.","社長はちょっとお出かけになりました。"],["영어 학원에 잠깐 다녔어요.","英語スクールにちょっと通いました。"]]},{"no":193,"kr":"하숙집","pron":"하숙찝","pos":"名","posCat":"noun","jp":"下宿屋","ex":[["저는 지금 하숙집에 살고 있습니다.","私は今、下宿屋に住んでいます。"],["하숙집 아주머니는 음식도 잘하세요.","下宿屋のおばさんは料理もお上手です。"]]},{"no":194,"kr":"회의","pron":"회의/훼이","pos":"名","posCat":"noun","jp":"会議","ex":[["회의는 4층 회의실에서 합니다.","会議は4階の会議室でやります。"],["언제 회의를 시작했어요?","いつ会議を始めましたか。"]]},{"no":195,"kr":"곧","pron":"","pos":"副","posCat":"adv","jp":"すぐ、間もなく","ex":[["영화가 곧 시작하니까 자리에 앉으세요.","映画がまもなく始まるから席にお座りください。"],["저는 이제 곧 고향에 돌아갈 거예요.","私はもうじき故郷へ帰るつもりです。"]]},{"no":196,"kr":"나쁘다","pron":"","pos":"形","posCat":"adj","jp":"悪い","ex":[["날씨가 나쁩니다. 비가 올 것 같습니다.","天気が悪いです。雨が降りそうです。"],["눈이 나빠서 안경을 씁니다.","目が悪いのでメガネを掛けます。"]]},{"no":197,"kr":"문화","pron":"","pos":"名","posCat":"noun","jp":"文化","ex":[["다른 나라의 문화에 관심이 많아요.","他国の文化に関心が高いです。"],["드라마를 보면 문화를 알 수 있어요.","ドラマを見ると文化がわかります。"]]},{"no":198,"kr":"벌써","pron":"","pos":"副","posCat":"adv","jp":"もう、すでに","ex":[["숙제는 벌써 다 했습니까?","宿題はもう全部終わりましたか。"],["2월에 시작했는데 벌써 3월이 됐습니다.","2月に始めたのにもう3月になりました。"]]},{"no":199,"kr":"여러","pron":"","pos":"冠/形","posCat":"det","jp":"いろいろな、様々な","ex":[["초급반에는 여러 나라 학생들이 있어요.","初級クラスにはいろいろな国の学生たちがいます。"],["한국에는 여러 번 다녀왔습니다.","韓国には何回も行ってきました。"]]},{"no":200,"kr":"휴가","pron":"","pos":"名","posCat":"noun","jp":"休暇","ex":[["다음 주부터 일주일 동안 휴가입니다.","来週から一週間休暇です。"],["몸이 안 좋아서 휴가를 받았습니다.","具合がよくないので休暇をもらいました。"]]},{"no":201,"kr":"공연","pron":"","pos":"名","posCat":"noun","jp":"公演","ex":[["공연은 몇 시에 시작해요?","公演は何時に始まりますか。"],["다음 주에 공연을 해요. 꼭 오세요.","来週、公演をします。ぜひ来てください。"]]},{"no":202,"kr":"눈","pron":"","pos":"名","posCat":"noun","jp":"目、雪","ex":[["지금 밖에는 눈이 옵니다.","今、外では雪が降っています。"],["눈이 오니까 모자를 쓰고 가세요.","雪が降るから帽子をかぶって行ってください。"]]},{"no":203,"kr":"막히다","pron":"마키다","pos":"動","posCat":"verb","jp":"詰まる、渋滞する","ex":[["변기가 막혀서 사람을 불렀어요.","便器が詰まったので人を呼びました。"],["사고가 나서 길이 막혀요.","事故があって道が混んでいます。"]]},{"no":204,"kr":"사랑하다","pron":"","pos":"動","posCat":"verb","jp":"愛する","ex":[["사랑하는 사람과 결혼하고 싶어요.","愛する人と結婚したいです。"],["부모님은 우리들을 사랑하십니다.","両親は私たちを愛しています。"]]},{"no":205,"kr":"산책","pron":"","pos":"名","posCat":"noun","jp":"散歩","ex":[["주말에 공원에서 산책을 합니다.","週末に公園で散歩をします。"],["저는 음악을 들으면서 산책해요.","私は音楽を聴きながら散歩します。"]]},{"no":206,"kr":"신발","pron":"","pos":"名","posCat":"noun","jp":"履物、靴","ex":[["신발을 벗고 들어오십시오.","履物を脱いで入ってください。"],["굽이 높은 신발을 오래 신으면 안 좋아요.","かかとの高い靴を長く履くとよくないです。"]]},{"no":207,"kr":"연필","pron":"","pos":"名","posCat":"noun","jp":"鉛筆","ex":[["시험을 볼 때는 연필로 쓰십시오.","テストを受ける時は鉛筆で書いてください。"],["문방구에서 연필과 책을 샀습니다.","文具店で鉛筆と本を買いました。"]]},{"no":208,"kr":"전공","pron":"","pos":"名","posCat":"noun","jp":"専攻","ex":[["제 전공은 한국 문화입니다.","私の専攻は韓国文化です。"],["웹디자인은 제 전공 분야입니다.","Webデザインは私の専攻分野です。"]]},{"no":209,"kr":"졸업","pron":"조럽","pos":"名","posCat":"noun","jp":"卒業","ex":[["졸업 후에 바로 취직을 했습니다.","卒業後にすぐ就職をしました。"],["저는 1995년에 고등학교를 졸업했습니다.","私は1995年に高校を卒業しました。"]]},{"no":210,"kr":"춥다","pron":"춥따","pos":"形","posCat":"adj","jp":"寒い","ex":[["날씨가 아주 춥습니다.","(天気が)とても寒いです。"],["세계에서 가장 추운 곳이 어디입니까?","世界で一番寒い所はどこですか。"]]},{"no":211,"kr":"필요하다","pron":"피료하다","pos":"形","posCat":"adj","jp":"必要だ","ex":[["오늘 수업은 교과서가 필요합니다.","今日の授業は教科書が必要です。"],["입장권이 필요한 분은 사무실로 오세요.","入場券が必要な方は事務室に来てください。"]]},{"no":212,"kr":"항상","pron":"","pos":"副","posCat":"adv","jp":"いつも、常に","ex":[["밥을 먹은 후에는 항상 이를 닦습니다.","ご飯を食べた後はいつも歯を磨きます。"],["친구는 항상 지각을 합니다.","友達はいつも遅刻をします。"]]},{"no":213,"kr":"혼자","pron":"","pos":"名","posCat":"noun","jp":"独り","ex":[["저는 한국에서 혼자 살고 있어요.","私は韓国でひとり暮らしをしています。"],["혼자서 해외 여행을 하는 것은 힘듭니다.","ひとりで海外旅行をするのは大変です。"]]},{"no":214,"kr":"걸다","pron":"","pos":"動","posCat":"verb","jp":"かける","ex":[["제가 친구에게 전화를 걸었어요.","私が友人に電話をかけました。"],["옷은 옷걸이에 거십시오.","服はハンガーにかけてください。"]]},{"no":215,"kr":"과자","pron":"","pos":"名","posCat":"noun","jp":"お菓子","ex":[["간식으로 과자를 먹어요.","おやつにお菓子を食べます。"],["슈퍼마켓에 과자를 사러 가요.","スーパーにお菓子を買いに行きます。"]]},{"no":216,"kr":"기숙사","pron":"기숙싸","pos":"名","posCat":"noun","jp":"寄宿舎、寮","ex":[["이 방이 기숙사에서 가장 커요.","この部屋が寄宿舎で一番大きいです。"],["기숙사에는 여러 나라 사람들이 살아요.","寄宿舎には様々な国の人が住んでいます。"]]},{"no":217,"kr":"모이다","pron":"","pos":"動","posCat":"verb","jp":"集まる","ex":[["2시에 회의실에서 모입시다.","2時に会議室で集まりましょう。"],["학교 정문에서 모이기로 했어요.","学校の正門で集まることにしました。"]]},{"no":218,"kr":"못하다","pron":"모타다","pos":"動","posCat":"verb","jp":"できない、下手だ","ex":[["저는 축구를 좋아하지만 잘 못해요.","私はサッカーが好きですが下手です。"],["수영을 못하는 사람을 위한 코스예요.","水泳ができない人のためのコースです。"]]},{"no":219,"kr":"반","pron":"","pos":"名","posCat":"noun","jp":"半、半分","ex":[["수업은 1시 반에 시작합니다.","授業は1時半に始まります。"],["케이크를 반으로 나눠서 먹었습니다.","ケーキを半分に分けて食べました。"]]},{"no":220,"kr":"복잡하다","pron":"복짜파다","pos":"形","posCat":"adj","jp":"複雑だ、混んでいる","ex":[["길이 복잡해서 시간이 많이 걸렸습니다.","道が混んでて時間がずいぶんかかりました。"],["복잡해 보이지만 방법은 간단해요.","複雑に見えるけど方法は簡単です。"]]},{"no":221,"kr":"숙제","pron":"숙쩨","pos":"名","posCat":"noun","jp":"宿題","ex":[["도서관에서 숙제를 하고 집에 왔습니다.","図書館で宿題をして家に帰ってきました。"],["숙제가 많아서 아직 다 못했어요.","宿題が多いのでまだ終わっていません。"]]},{"no":222,"kr":"시청","pron":"","pos":"名","posCat":"noun","jp":"市役所","ex":[["투어 버스는 시청 앞에서 출발합니다.","ツアーバスは市庁前から出発します。"],["시청은 다음 역에서 내리면 됩니다.","市庁は次の駅で降りればいいです。"]]},{"no":223,"kr":"오래","pron":"","pos":"副","posCat":"adv","jp":"長く","ex":[["이 집에 오래 살았어요.","この家に長く住みました。"],["여기까지 오는데 시간이 오래 걸렸어요?","ここまで来るのに時間が長くかかりましたか。"]]},{"no":224,"kr":"우유","pron":"","pos":"名","posCat":"noun","jp":"牛乳","ex":[["가게에서 빵과 우유를 샀어요.","お店でパンと牛乳を買いました。"],["언니는 우유를 싫어합니다.","姉は牛乳が嫌いです。"]]},{"no":225,"kr":"의자","pron":"","pos":"名","posCat":"noun","jp":"椅子","ex":[["방에 침대와 책상과 의자가 있습니다.","部屋にベッドと机と椅子があります。"],["이 의자에 앉으면 항상 잠이 와요.","この椅子に座るといつも眠くなります。"]]},{"no":226,"kr":"이제","pron":"","pos":"副/名","posCat":"adv","jp":"もう、すでに、（ただ）今","ex":[["이제는 한국 음식도 잘 먹습니다.","今では韓国料理もよく食べます。"],["아이들은 이제부터 잘 거예요.","子どもたちは今から寝ます。"]]},{"no":227,"kr":"즐겁다","pron":"즐겁따","pos":"形","posCat":"adj","jp":"楽しい","ex":[["한국 생활은 정말 즐거워요.","韓国生活は本当に楽しいです。"],["주말 즐겁게 보내세요.","楽しい週末をお過ごしください。"]]},{"no":228,"kr":"걱정하다","pron":"걱쩡하다","pos":"動","posCat":"verb","jp":"心配する","ex":[["다 잘 될 거니까 너무 걱정하지 마세요.","全部うまくいくからあまり心配しないでください。"],["아버지가 다치셔서 많이 걱정했습니다.","父が怪我をしたのでずいぶん心配しました。"]]},{"no":229,"kr":"건물","pron":"","pos":"名","posCat":"noun","jp":"建物","ex":[["그 건물에서 왼쪽으로 가세요.","その建物から左へ行ってください。"],["여기는 높은 건물이 많지 않습니다.","ここは高い建物が多くありません。"]]},{"no":230,"kr":"담배","pron":"","pos":"名","posCat":"noun","jp":"タバコ","ex":[["여기에서는 담배를 피우지 마십시오.","ここではタバコを吸わないでください。"],["담배는 몸에 안 좋습니다.","タバコは体によくありません。"]]},{"no":231,"kr":"방법","pron":"","pos":"名","posCat":"noun","jp":"方法","ex":[["지하철역에 가는 방법을 알고 싶습니다.","地下鉄駅に行く方法を知りたいです。"],["신청 방법을 가르쳐 주십시오.","申請方法を教えてください。"]]},{"no":232,"kr":"어서","pron":"","pos":"副","posCat":"adv","jp":"どうぞ、早く","ex":[["어서 드세요.","どうぞお召し上がりください。"],["어서 시작합시다.","早く始めましょう。"]]},{"no":233,"kr":"여행사","pron":"","pos":"名","posCat":"noun","jp":"旅行会社","ex":[["비행기 표를 예약하러 여행사에 갑니다.","航空券を予約しに旅行会社に行きます。"],["우체국 옆에 여행사가 있습니다.","郵便局の隣に旅行会社があります。"]]},{"no":234,"kr":"오랜만","pron":"","pos":"名","posCat":"noun","jp":"久しぶり","ex":[["오랜만에 친구를 만났어요.","久しぶりに友達に会いました。"],["초등학교 동창회는 정말 오랜만입니다.","小学校の同窓会は本当に久しぶりです。"]]},{"no":235,"kr":"잃어버리다","pron":"이러버리다","pos":"動","posCat":"verb","jp":"失くしてしまう","ex":[["지갑을 잃어버려서 돈을 빌렸어요.","財布を失くしてしまってお金を借りました。"],["잃어버린 열쇠를 찾았습니다.","失くしてしまった鍵を見つけました。"]]},{"no":236,"kr":"행사","pron":"","pos":"名","posCat":"noun","jp":"行事、イベント","ex":[["한국의 김치를 담그는 행사가 있습니다.","韓国のキムチを漬けるイベントがあります。"],["주말에는 재미있는 행사가 많이 있습니다.","週末はおもしろい行事がたくさんあります。"]]},{"no":237,"kr":"값","pron":"갑","pos":"名","posCat":"noun","jp":"値段","ex":[["사과 한 개에 값이 얼마예요?","リンゴ1個で値段はいくらですか。"],["동대문 시장은 물건도 많고 값도 쌉니다.","東大門市場は品物も多くて値段も安いです。"]]},{"no":238,"kr":"결혼","pron":"","pos":"名","posCat":"noun","jp":"結婚","ex":[["스무살이 되면 결혼을 하고 싶어요.","二十歳になったら結婚をしたいです。"],["작년에 결혼한 친구 집에 놀러 갔습니다.","昨年に結婚した友達の家に遊びに行きました。"]]},{"no":239,"kr":"꽃집","pron":"꼳찝","pos":"名","posCat":"noun","jp":"花屋","ex":[["생일 선물로 꽃집에서 꽃을 샀습니다.","誕生日プレゼントに花屋で花を買いました。"],["최근에 이 건물 1층에 꽃집이 생겼어요.","最近、このビルの1階に花屋ができました。"]]},{"no":240,"kr":"들어오다","pron":"드러오다","pos":"動","posCat":"verb","jp":"入る、入ってくる","ex":[["한 사람씩 들어오십시오.","1人ずつ入ってきてください。"],["요즘 계속 늦게 들어와서 좀 피곤해요.","最近ずっと遅く帰ってたので少し疲れています。"]]},{"no":241,"kr":"안경","pron":"","pos":"名","posCat":"noun","jp":"眼鏡","ex":[["안경이 멋있네요.","メガネが素敵ですね。"],["책을 볼 때 잘 안 보여서 안경을 써요.","本を読む時、よく見えないのでメガネをかけます。"]]},{"no":242,"kr":"열다","pron":"","pos":"動","posCat":"verb","jp":"開ける、開く","ex":[["방이 더워요. 창문을 열어 주십시오.","部屋が暑いです。窓を開けてください。"],["가게 문 여는 시간이 몇 시예요?","お店を開ける時間は何時ですか。"]]},{"no":243,"kr":"요금","pron":"","pos":"名","posCat":"noun","jp":"料金","ex":[["버스 요금이 얼마예요?","バス料金はいくらですか。"],["학생은 요금이 할인됩니까?","学生は料金が割引できますか。"]]},{"no":244,"kr":"제일","pron":"","pos":"名/副","posCat":"noun","jp":"一番、最も","ex":[["우리 반에서 제가 키가 제일 큽니다.","うちのクラスで私が背が一番高いです。"],["된장찌개를 제일 좋아합니다.","味噌チゲが一番好きです。"]]},{"no":245,"kr":"집","pron":"","pos":"名","posCat":"noun","jp":"家","ex":[["우리 집은 지하철역 앞에 있습니다.","我が家は地下鉄駅の前にあります。"],["오늘은 집에 일찍 들어가서 푹 쉬세요.","今日は家に早く帰ってゆっくり休んでください。"]]},{"no":246,"kr":"창문","pron":"","pos":"名","posCat":"noun","jp":"窓","ex":[["이 방은 창문이 커서 밝습니다.","この部屋は窓が大きくて明るいです。"],["바람이 많이 불어서 창문을 닫았습니다.","風が吹きすぎるので窓を閉めました。"]]},{"no":247,"kr":"치마","pron":"","pos":"名","posCat":"noun","jp":"スカート","ex":[["제 친구는 바지보다 치마가 어울려요.","私の友達はズボンよりスカートが似合います。"],["어제 옷가게에서 치마하고 바지를 샀어요.","昨日、服屋でスカートとズボンを買いました。"]]},{"no":248,"kr":"감기","pron":"","pos":"名","posCat":"noun","jp":"風邪","ex":[["감기에 걸려서 목이 아파요.","風邪を引いたのでのどが痛いです。"],["이 차는 감기에 효과가 있습니다.","このお茶は風邪に効果があります。"]]},{"no":249,"kr":"관심","pron":"","pos":"名","posCat":"noun","jp":"関心、興味","ex":[["건강에 관심 있는 사람들이 많네요.","健康に関心がある人たちが多いですね。"],["이번 행사에 많은 관심 부탁드리겠습니다.","今回の行事に高い関心をお願いいたします。"]]},{"no":250,"kr":"교실","pron":"","pos":"名","posCat":"noun","jp":"教室","ex":[["여기는 초급반 교실입니다.","ここは初級クラスの教室です。"],["교실에서 음식을 먹으면 안 돼요.","教室で食べ物を食べてはいけません。"]]},{"no":251,"kr":"교통","pron":"","pos":"名","posCat":"noun","jp":"交通","ex":[["거기는 교통이 너무 불편해요.","そこは交通がとても不便です。"],["어제 큰 길에서 교통 사고가 났어요.","昨日大通りで交通事故が起きました。"]]},{"no":252,"kr":"길다","pron":"","pos":"形","posCat":"adj","jp":"長い","ex":[["앞머리가 길어요.","前髪が長いです。"],["산에 갈 때는 긴 바지가 좋습니다.","山に行く時は長いズボンがいいです。"]]},{"no":253,"kr":"나가다","pron":"","pos":"動","posCat":"verb","jp":"出かける、出る、出ていく","ex":[["주말인데 밖에 나가서 놉시다.","週末なので外に出かけて遊びましょう。"],["노래 자랑 대회에 나갔습니다.","のど自慢大会に出ました。"]]},{"no":254,"kr":"바뀌다","pron":"","pos":"動","posCat":"verb","jp":"変わる","ex":[["행사 날짜가 바뀌었어요.","イベントの日にちが変わりました。"],["메일 주소가 바뀐 것을 몰랐어요.","メールアドレスが変わったのを知りませんでした。"]]},{"no":255,"kr":"부치다","pron":"","pos":"動","posCat":"verb","jp":"（郵便物を）送る","ex":[["비행기를 타기 전에 짐을 부쳤어요.","飛行機に乗る前に荷物を送りました。"],["오늘 부친 소포는 내일 도착합니까?","今日送った小包は明日到着しますか。"]]},{"no":256,"kr":"소식","pron":"","pos":"名","posCat":"noun","jp":"便り、消息、近況","ex":[["오랜만에 고향 소식을 들었습니다.","久しぶりに故郷の便りを聞きました。"],["어머니에게 여동생의 소식을 전했습니다.","母に妹の近況を伝えました。"]]},{"no":257,"kr":"수업","pron":"","pos":"名","posCat":"noun","jp":"授業","ex":[["오늘은 쉬는 날이라서 수업이 없어요.","今日は休日なので授業がありません。"],["바로 수업을 듣고 싶습니다.","すぐに授業を受けたいです。"]]},{"no":258,"kr":"싫어하다","pron":"시러하다","pos":"動","posCat":"verb","jp":"嫌う、嫌がる","ex":[["쓰기를 싫어했는데 지금은 좋아해요.","書くのが嫌いでしたが今は好きです。"],["여동생은 더워서 여름을 싫어합니다.","妹は暑いので夏が嫌いです。"]]},{"no":259,"kr":"조용하다","pron":"","pos":"形","posCat":"adj","jp":"静かだ","ex":[["이 동네는 조용해서 좋습니다.","この町は静かなのでいいです。"],["저는 말이 없고 조용한 아이였습니다.","私は無口で物静かな子どもでした。"]]},{"no":260,"kr":"피우다","pron":"","pos":"動","posCat":"verb","jp":"吸う","ex":[["비행기 안에서는 담배를 못 피워요.","飛行機の中ではタバコを吸えません。"],["담배를 피우려면 흡연석으로 가세요.","タバコを吸うには喫煙席に行ってください。"]]},{"no":261,"kr":"가장","pron":"","pos":"副","posCat":"adv","jp":"もっとも、一番","ex":[["저는 흰색을 가장 좋아합니다.","私は白が一番好きです。"],["감기에 걸리면 쉬는 것이 가장 좋습니다.","風邪を引いたら休むのが一番いいです。"]]},{"no":262,"kr":"닫다","pron":"닫따","pos":"動","posCat":"verb","jp":"閉める、閉じる","ex":[["추운데 창문을 좀 닫아 주시겠습니까?","寒いので窓を閉めていただけますか。"],["은행은 4시에 닫습니다.","銀行は4時に閉まります。"]]},{"no":263,"kr":"돕다","pron":"돕따","pos":"動","posCat":"verb","jp":"助ける、手伝う","ex":[["친구가 바쁠 때는 도와야 합니다.","友達が忙しい時は手伝わなければなりません。"],["사람을 돕는 것은 기분이 좋습니다.","人を助けることは気持ちがいいです。"]]},{"no":264,"kr":"마르다","pron":"","pos":"動","posCat":"verb","jp":"乾く、やせる","ex":[["목이 마른데 물 좀 주세요.","のどが渇いているので水をください。"],["운동을 해서 말랐습니다.","運動をしたのでやせました。"]]},{"no":265,"kr":"맞다","pron":"맏따","pos":"動","posCat":"verb","jp":"合う、正しい","ex":[["오늘이 금요일 맞지요?","今日は金曜日ですよね。"],["발이 작아서 맞는 사이즈가 없어요.","足が小さいので合うサイズがありません。"]]},{"no":266,"kr":"멋있다","pron":"머딛따/머싣따","pos":"形","posCat":"adj","jp":"素敵だ、かっこいい","ex":[["진영 씨는 예쁘고 민수 씨는 멋있습니다.","ジニョンさんはきれいでミンスさんは素敵です。"],["선생님은 짧은 머리가 더 멋있어 보여요.","先生は短い髪型がもっとかっこよく見えます。"]]},{"no":267,"kr":"묻다","pron":"묻따","pos":"動","posCat":"verb","jp":"尋ねる、聞く","ex":[["선생님에게 시험 날짜를 물었어요.","先生にテストの日にちを尋ねました。"],["누구에게 묻는 것이 좋을까요?","誰に尋ねるのがいいでしょうか。"]]},{"no":268,"kr":"별로","pron":"","pos":"副","posCat":"adv","jp":"あまり、それほど","ex":[["다친 사람이 별로 없어서 다행이에요.","怪我人があまりいなくてよかったです。"],["시험은 별로 안 어려웠어요.","テストはそれほど難しくなかったです。"]]},{"no":269,"kr":"생기다","pron":"","pos":"動","posCat":"verb","jp":"生じる、できる、起きる","ex":[["집 근처에 맛있는 식당이 생겼어요.","家の近くにおいしいレストランができました。"],["여동생하고 저는 비슷하게 생겼습니다.","妹と私は似ています。"]]},{"no":270,"kr":"자리","pron":"","pos":"名","posCat":"noun","jp":"席、座席、場所","ex":[["도서관에 앉을 자리가 없습니다.","図書館に座る席がありません。"],["이 자리에 앉아도 됩니까?","この席に座ってもいいですか。"]]},{"no":271,"kr":"처음","pron":"","pos":"名","posCat":"noun","jp":"初め、最初","ex":[["한국에 언제 처음 오셨습니까?","韓国に初めていらしたのはいつですか。"],["처음에는 어렵습니다.","初めは難しいです。"]]},{"no":272,"kr":"화장실","pron":"","pos":"名","posCat":"noun","jp":"トイレ、化粧室","ex":[["실례합니다. 화장실이 어디입니까?","失礼します。トイレはどこですか。"],["손을 씻으러 화장실에 갔어요.","手を洗いにトイレに行きました。"]]},{"no":273,"kr":"계속","pron":"계속/게속","pos":"副","posCat":"adv","jp":"継続して、続き","ex":[["저는 한국어를 계속 공부할 겁니다.","私は韓国語を勉強し続けるつもりです。"],["내일도 계속 눈이 오겠습니다.","明日も引き続き雪が降るでしょう。"]]},{"no":274,"kr":"고르다","pron":"","pos":"動","posCat":"verb","jp":"選ぶ","ex":[["마음에 드는 것을 고르세요.","気に入ったものを選んでください。"],["이 색이 잘 어울려서 이것을 골랐어요.","この色がよく似合うのでこれを選びました。"]]},{"no":275,"kr":"공기","pron":"","pos":"名","posCat":"noun","jp":"空気","ex":[["공기도 깨끗하고 경치도 아름다웠어요.","空気もきれいで景色も美しかったです。"],["방 공기가 안 좋아서 창문을 열었어요.","部屋の空気がよくないので窓を開けました。"]]},{"no":276,"kr":"냉면","pron":"","pos":"名","posCat":"noun","jp":"冷麺","ex":[["더우니까 냉면을 시킵시다.","暑いから冷麺を注文しましょう。"],["저는 냉면이나 불고기를 먹고 싶습니다.","私は冷麺やプルコギが食べたいです。"]]},{"no":277,"kr":"넓다","pron":"널따","pos":"形","posCat":"adj","jp":"広い","ex":[["이 건물의 주차장은 넓습니다.","この建物の駐車場は広いです。"],["부엌이 넓은 집으로 이사하고 싶어요.","台所が広い家に引越したいです。"]]},{"no":278,"kr":"높다","pron":"놉따","pos":"形","posCat":"adj","jp":"高い","ex":[["스카이트리는 도쿄에서 가장 높아요.","スカイツリーは東京で一番高いです。"],["굽이 높은 구두를 신어서 발이 아파요.","かかとが高い靴を履いたので足が痛いです。"]]},{"no":279,"kr":"돌아오다","pron":"도라오다","pos":"動","posCat":"verb","jp":"帰ってくる","ex":[["저녁을 먹은 후에 집에 돌아왔습니다.","夕食を食べてから家に帰ってきました。"],["출장에서 이틀 후에 돌아올 겁니다.","出張から二日後に帰ってくる予定です。"]]},{"no":280,"kr":"미리","pron":"","pos":"副","posCat":"adv","jp":"前もって、あらかじめ","ex":[["상담하고 싶으면 미리 예약해야 해요.","相談したいなら前もって予約しなければなりません。"],["참가할 사람은 미리 말씀해 주십시오.","参加する人は前もっておっしゃってください。"]]},{"no":281,"kr":"설명하다","pron":"","pos":"動","posCat":"verb","jp":"説明する","ex":[["선생님은 늘 친절하게 설명해 줍니다.","先生はいつも親切に説明してくれます。"],["가게에 오는 방법을 설명하고 있습니다.","店に来る方法を説明しています。"]]},{"no":282,"kr":"세우다","pron":"","pos":"動","posCat":"verb","jp":"止める、建てる、立てる","ex":[["저기 지하철역 앞에서 세워 주세요.","あそこの地下鉄駅の前で止めてください。"],["지금 여행 계획을 세우고 있습니다.","今旅行の計画を立てています。"]]},{"no":283,"kr":"아름답다","pron":"아름답따","pos":"形","posCat":"adj","jp":"美しい","ex":[["도쿄 타워의 야경은 정말 아름다워요.","東京タワーの夜景は本当に美しいです。"],["여배우가 아름다운 드레스를 입었어요.","女優が美しいドレスを着ていました。"]]},{"no":284,"kr":"요리","pron":"","pos":"名","posCat":"noun","jp":"料理、食べ物","ex":[["제 취미는 요리입니다.","私の趣味は料理です。"],["친구가 집에 와서 맛있는 요리를 했어요.","友達が家に来ておいしい料理を作りました。"]]},{"no":285,"kr":"잡다","pron":"잡따","pos":"動","posCat":"verb","jp":"つかむ、握る、釣る","ex":[["낚시를 가서 물고기를 많이 잡았어요.","釣りに行って魚をたくさん釣りました。"],["잡은 손을 놓지 마세요.","つかんだ手を離さないでください。"]]},{"no":286,"kr":"표","pron":"","pos":"名","posCat":"noun","jp":"切符、チケット、券","ex":[["기차표는 인터넷으로 예매해야 합니다.","電車の切符はネットで購入しなければなりません。"],["공연 당일에는 표를 바꿀 수 없습니다.","公演当日にはチケットを換えることはできません。"]]},{"no":287,"kr":"구하다","pron":"","pos":"動","posCat":"verb","jp":"求める、探す","ex":[["4월에 집을 구하는 것은 쉽지 않네요.","4月に家を探すのは簡単ではありませんね。"],["고민이 있으면 선배에게 조언을 구하세요.","悩みがあれば先輩に助言を求めてください。"]]},{"no":288,"kr":"그리다","pron":"","pos":"動","posCat":"verb","jp":"描く","ex":[["여동생은 정말 그림을 잘 그려요.","妹は本当に絵を上手に描きます。"],["연필로 그린 그림이 꼭 사진 같아요.","鉛筆で書いた絵がまるで写真のようです。"]]},{"no":289,"kr":"다녀오다","pron":"","pos":"動","posCat":"verb","jp":"行ってくる","ex":[["오전에 병원에 다녀왔어요.","午前に病院に行ってきました。"],["학교 다녀오겠습니다!","学校行ってきます！"]]},{"no":290,"kr":"물어보다","pron":"무러보다","pos":"動","posCat":"verb","jp":"尋ねる、聞いてみる","ex":[["선생님에게 물어보세요.","先生に尋ねてください。"],["지금 물어봐도 돼요?","今、聞いてみてもいいですか。"]]},{"no":291,"kr":"쇼핑","pron":"","pos":"名","posCat":"noun","jp":"買い物、ショッピング","ex":[["인터넷 쇼핑은 편리합니다.","ネットショッピングは便利です。"],["친구와 주말에 쇼핑을 했습니다.","友達と週末に買い物をしました。"]]},{"no":292,"kr":"웃다","pron":"욷따","pos":"動","posCat":"verb","jp":"笑う","ex":[["코미디 영화를 보고 많이 웃었습니다.","コメディ映画を見てたくさん笑いました。"],["웃는 얼굴을 보면 기분이 좋습니다.","笑顔を見ると気分がいいです。"]]},{"no":293,"kr":"잡지","pron":"잡찌","pos":"名","posCat":"noun","jp":"雑誌","ex":[["잡지는 빌릴 수 없습니다.","雑誌は借りることができません。"],["최근에 제일 인기가 있는 잡지입니다.","最近一番人気がある雑誌です。"]]},{"no":294,"kr":"적다","pron":"적따","pos":"形","posCat":"adj","jp":"少ない","ex":[["올해는 보너스가 적어요.","今年はボーナスが少ないです。"],["양이 적어서 배가 안 불러요.","量が少なくてお腹いっぱいになりません。"]]},{"no":295,"kr":"조심하다","pron":"","pos":"動","posCat":"verb","jp":"気をつける、注意する","ex":[["감기에 걸리지 않게 조심해야 합니다.","風邪を引かないよう気をつけなければなりません。"],["도로에서는 차를 조심합시다.","道路では車に気をつけましょう。"]]},{"no":296,"kr":"직장","pron":"직짱","pos":"名","posCat":"noun","jp":"職場","ex":[["우리 집은 직장에서 가까워요.","私の家は職場から近いです。"],["직장 동료와 이야기를 했어요.","職場の同僚と話をしました。"]]},{"no":297,"kr":"넣다","pron":"너타","pos":"動","posCat":"verb","jp":"入れる","ex":[["음식에 설탕을 너무 많이 넣지 마세요.","料理に砂糖を多く入れすぎないでください。"],["지갑 속에 가족 사진을 넣고 다녀요.","財布の中に家族写真を入れて持ち歩いています。"]]},{"no":298,"kr":"놓다","pron":"노타","pos":"動","posCat":"verb","jp":"置く","ex":[["꽃병을 탁자 위에 놓았습니다.","花瓶をテーブルの上に置きました。"],["짐은 문 옆에 놓아 주세요.","荷物はドアの横に置いてください。"]]},{"no":299,"kr":"늘다","pron":"","pos":"動","posCat":"verb","jp":"伸びる、増える","ex":[["열심히 공부하면 꼭 실력이 늘 거예요.","一生懸命に勉強すれば必ず実力が伸びるでしょう。"],["처음보다 친구가 많이 늘었어요.","初めより友人がたくさん増えました。"]]},{"no":300,"kr":"밝다","pron":"박따","pos":"形","posCat":"adj","jp":"明るい","ex":[["그녀는 정말 성격이 밝습니다.","彼女は本当に性格が明るいです。"],["봄에는 밝은 색 옷을 많이 입습니다.","春には明るい色の服をたくさん着ます。"]]}];
+const POS_LABELS={verb:'🏃 動詞',adj:'🎨 形容詞',noun:'📦 名詞',adv:'⚡ 副詞',aux:'🔧 補助',det:'🔖 冠形'};
+
+/* ---- storage ---- */
+const DB={
+  get k(){return JSON.parse(localStorage.getItem('topik300_db')||'{}')},
+  save(d){localStorage.setItem('topik300_db',JSON.stringify(d))},
+  init(){let d=this.k;
+    d.solved=d.solved||0; d.correct=d.correct||0;
+    d.weak=d.weak||{};        // {no:count}
+    d.mastered=d.mastered||{}; // {no:true} from example-mode self-grade / flashcards
+    d.examDate=d.examDate||null;
+    this.save(d); return d;
+  }
+};
+let db=DB.init();
+function persist(){DB.save(db)}
+
+const $=s=>document.querySelector(s);
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600)}
+
+/* ---- filters ---- */
+let FILTER={kind:'all',key:null};   // pos:xxx
+let RANGE={start:1,end:300};
+const RANGES=[[1,100],[101,200],[201,300]];
+function poolWords(){
+  let base=WORDS.filter(w=>w.no>=RANGE.start&&w.no<=RANGE.end);
+  if(FILTER.kind==='pos')base=base.filter(w=>w.posCat===FILTER.key);
+  return base;
+}
+function buildChips(){
+  const pc=$('#posChips');pc.innerHTML='';
+  const all=document.createElement('div');all.className='chip'+(FILTER.kind==='all'?' on':'');all.textContent='全 300';
+  all.onclick=()=>{FILTER={kind:'all',key:null};syncChips();updPool()};pc.appendChild(all);
+  ['verb','noun','adj','adv'].forEach(k=>{
+    const n=WORDS.filter(w=>w.posCat===k).length;
+    const ch=document.createElement('div');ch.className='chip';ch.textContent=POS_LABELS[k]+' '+n;
+    ch.onclick=()=>{FILTER={kind:'pos',key:k};syncChips();updPool()};pc.appendChild(ch);
+  });
+  const rc=$('#rangeChips');rc.innerHTML='';
+  const ra=document.createElement('div');ra.className='chip on';ra.textContent='全範囲';ra.dataset.r='all';
+  ra.onclick=()=>{RANGE={start:1,end:300};syncRange(ra);updPool()};rc.appendChild(ra);
+  RANGES.forEach(([s,e])=>{
+    const ch=document.createElement('div');ch.className='chip';ch.textContent=s+'–'+e;ch.dataset.r=s;
+    ch.onclick=()=>{RANGE={start:s,end:e};syncRange(ch);updPool()};rc.appendChild(ch);
+  });
+}
+function syncChips(){document.querySelectorAll('#posChips .chip').forEach((c,i)=>{
+  const isAll=i===0; c.classList.toggle('on',(isAll&&FILTER.kind==='all')||(!isAll&&FILTER.kind==='pos'&&c.textContent.startsWith(POS_LABELS[FILTER.key])));
+});}
+function syncRange(el){document.querySelectorAll('#rangeChips .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on')}
+function updPool(){const n=poolWords().length;$('#poolCnt').textContent=n+'語';}
+
+/* ---- home ---- */
+function refreshHome(){
+  const m=Object.keys(db.mastered).length;
+  $('#stMastered').textContent=m;
+  $('#stAcc').textContent=db.solved?Math.round(db.correct/db.solved*100)+'%':'-';
+  const wk=Object.keys(db.weak).length;
+  $('#stWeak').textContent=wk; $('#weakTag').textContent=wk;
+  $('#heroBar').style.width=Math.round(m/WORDS.length*100)+'%';
+  // d-day
+  if(db.examDate){
+    const left=daysLeft();
+    $('#ddayN').textContent=left>=0?('D-'+left):'D+'+(-left);
+    $('#ddayL').textContent=left>0?('本番まで'+left+'日'):left===0?'本番当日':'試験終了';
+  }else{$('#ddayN').textContent='–';$('#ddayL').textContent='試験日設定';}
+  updPool();
+}
+function daysLeft(){if(!db.examDate)return null;const t=new Date(new Date().toISOString().slice(0,10)+'T00:00:00');const e=new Date(db.examDate+'T00:00:00');return Math.round((e-t)/86400000);}
+function addDays(n){const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+
+function openDateModal(){const q=$('#quickDates');$('#dateInput').value=db.examDate||addDays(14);q.innerHTML='';
+  [['1週間後',addDays(7)],['2週間後',addDays(14)],['1ヶ月後',addDays(30)]].forEach(([l,v])=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{$('#dateInput').value=v};q.appendChild(b);});
+  $('#dateModal').classList.add('show');}
+function closeDateModal(){$('#dateModal').classList.remove('show')}
+function saveExamDate(){const v=$('#dateInput').value;if(!v){toast('日付を選んでね');return}db.examDate=v;persist();closeDateModal();refreshHome();toast('試験日を設定しました 🔥');}
+function resetProgress(){if(confirm('学習の進捗（覚えた語・苦手・正答率）をすべて消去しますか？試験日は残ります。')){const ex=db.examDate;localStorage.removeItem('topik300_db');db=DB.init();db.examDate=ex;persist();refreshHome();toast('進捗をリセットしました');}}
+
+/* ---- screen control ---- */
+function openScreen(){$('#screen').classList.add('show');document.body.style.overflow='hidden';$('#qwrap').style.justifyContent='center';}
+function closeScreen(){$('#screen').classList.remove('show');document.body.style.overflow='';refreshHome();}
+function quit(){closeScreen();}
+
+/* ---- dispatch ---- */
+function start(mode){
+  if(mode==='browse')return browse();
+  if(mode==='ex')return exampleMode();
+  if(mode==='flash')return flash();
+  if(mode==='weak'){ if(!Object.keys(db.weak).length){toast('苦手リストは空です。まず解いてみてね');return} return askCount('weak'); }
+  askCount(mode);
+}
+function maxCount(mode){
+  if(mode==='weak')return Object.keys(db.weak).length;
+  return Math.min(poolWords().length,100);
+}
+function askCount(mode){
+  const LABELS={w_kj:'韓 → 日',w_jk:'日 → 韓',ex_quiz:'例文穴埋め',weak:'苦手だけ復習'};
+  const mx=maxCount(mode); const opts=[];
+  opts.push({l:'10問',n:Math.min(10,mx)});
+  if(mx>10)opts.push({l:'20問',n:Math.min(20,mx)});
+  if(mx>20)opts.push({l:'30問',n:Math.min(30,mx)});
+  if(mx>30)opts.push({l:'全部（'+mx+'問）',n:mx});
+  const seen=new Set();const o2=opts.filter(o=>{if(seen.has(o.n))return false;seen.add(o.n);return true;});
+  openScreen();$('#qCount').textContent='';$('#progBar').style.width='0';
+  const w=$('#qwrap');w.className='qwrap';w.innerHTML=
+    '<div class="qtype">'+(LABELS[mode]||'')+'</div>'+
+    '<div class="excard"><div class="qprompt">何問チャレンジする？</div><div class="qword" style="font-size:22px">問題数を選ぶ</div><div class="qsub">出題は毎回ランダム</div></div>'+
+    '<div class="opts">'+o2.map(o=>'<button class="opt" style="justify-content:center" onclick="startQuiz(\''+mode+'\','+o.n+')"><span>'+o.l+'</span></button>').join('')+'</div>'+
+    '<button class="btn ghost" onclick="closeScreen()">← 戻る</button>';
+}
+
+/* ================= QUIZ ENGINE ================= */
+let Q={list:[],i:0,correct:0,wrong:[],mode:'',answered:false,t0:0,count:0};
+function startQuiz(mode,count){
+  Q={list:[],i:0,correct:0,wrong:[],mode,count,answered:false,t0:Date.now()};
+  if(mode==='w_kj')Q.list=buildWord('kj',count,poolWords());
+  else if(mode==='w_jk')Q.list=buildWord('jk',count,poolWords());
+  else if(mode==='ex_quiz')Q.list=buildExQuiz(count,poolWords());
+  else if(mode==='weak')Q.list=buildWeak(count);
+  if(!Q.list.length){toast('対象データがありません');return}
+  openScreen();renderQ();
+}
+function distract(pool,w,key,n){const seen=new Set([key(w)]);const out=[];for(const o of shuffle(pool.filter(x=>x.no!==w.no))){const k=key(o);if(!seen.has(k)){seen.add(k);out.push(o)}if(out.length>=n)break;}
+  // top up from全WORDS if小pool
+  if(out.length<n){for(const o of shuffle(WORDS.filter(x=>x.no!==w.no))){const k=key(o);if(!seen.has(k)){seen.add(k);out.push(o)}if(out.length>=n)break;}}
+  return out;}
+function buildWord(dir,n,pool){const kj=dir==='kj';const picks=shuffle(pool).slice(0,n);
+  return picks.map(w=>{const ds=distract(pool.length>=4?pool:WORDS,w,o=>kj?o.jp:o.kr,3);
+    const od=shuffle([w,...ds]);
+    return{type:'mc',qtype:kj?'WORD ｜ 韓 → 日':'WORD ｜ 日 → 韓',promptLabel:kj?'次の単語の意味は？':'次の意味の単語は？',
+      wordClass:kj?'kr':'',prompt:kj?w.kr:w.jp,optClass:kj?'':'kr',
+      opts:od.map(o=>({text:kj?o.jp:o.kr,correct:o.no===w.no})),ref:w,
+      explain:'<span class="ko">'+w.kr+'</span>'+(w.pron?'［'+w.pron+'］':'')+' ＝ '+w.jp+'<br><span class="ko">'+w.ex[0][0]+'</span><br>'+w.ex[0][1]};
+  });
+}
+function buildExQuiz(n,pool){const picks=shuffle(pool).slice(0,n);
+  return picks.map(w=>{const ds=distract(pool.length>=4?pool:WORDS,w,o=>o.kr,3);const od=shuffle([w,...ds]);
+    const ex=w.ex[Math.floor(Math.random()*w.ex.length)];
+    // blank out the word's surface form if present, else show jp hint
+    let masked=ex[0]; let shown=false;
+    const stem=w.kr.replace(/다$/,'');
+    const re=new RegExp(stem.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+    if(re.test(masked)){masked=masked.replace(re,'(　　)');shown=true;}
+    return{type:'mc',qtype:'例文 ｜ 穴埋め',promptLabel:'文に合う単語は？（意味：'+w.jp+'）',
+      sentence:shown?masked:ex[0],optClass:'kr',
+      opts:od.map(o=>({text:o.kr,correct:o.no===w.no})),ref:w,
+      explain:'<span class="ko">'+ex[0]+'</span><br>'+ex[1]};
+  });
+}
+function buildWeak(n){const nos=Object.keys(db.weak).map(Number);const ws=nos.map(no=>WORDS.find(w=>w.no===no)).filter(Boolean);const picks=shuffle(ws).slice(0,n);
+  return picks.map(w=>{const kj=Math.random()<.5;const ds=distract(WORDS,w,o=>kj?o.jp:o.kr,3);const od=shuffle([w,...ds]);
+    return{type:'mc',qtype:'WEAK ｜ 苦手復習',promptLabel:kj?'次の単語の意味は？':'次の意味の単語は？',
+      wordClass:kj?'kr':'',prompt:kj?w.kr:w.jp,optClass:kj?'':'kr',
+      opts:od.map(o=>({text:kj?o.jp:o.kr,correct:o.no===w.no})),ref:w,
+      explain:'<span class="ko">'+w.kr+'</span> ＝ '+w.jp+'<br><span class="ko">'+w.ex[0][0]+'</span><br>'+w.ex[0][1]};
+  });
+}
+function renderQ(){const q=Q.list[Q.i];Q.answered=false;
+  $('#progBar').style.width=(Q.i/Q.list.length*100)+'%';$('#qCount').textContent=(Q.i+1)+' / '+Q.list.length;
+  let promptHTML;
+  if(q.sentence){const s=q.sentence.replace('(　　)','<span class="hl">？</span>');promptHTML='<div class="qprompt">'+q.promptLabel+'</div><div class="exsent">'+s+'</div>';}
+  else promptHTML='<div class="qprompt">'+q.promptLabel+'</div><div class="qword '+(q.wordClass||'')+'">'+q.prompt+'</div>';
+  const optsHTML=q.opts.map((o,i)=>'<button class="opt '+(q.optClass||'')+'" data-i="'+i+'" onclick="answer('+i+')"><span class="num">'+(i+1)+'</span><span>'+o.text+'</span></button>').join('');
+  const w=$('#qwrap');w.className='qwrap fade';
+  w.innerHTML='<div class="qtype">'+q.qtype+'</div><div class="excard">'+promptHTML+'</div><div class="opts" id="opts">'+optsHTML+'</div><div class="feedback" id="fb"><div class="ft" id="fbT"></div><div class="fx" id="fbX"></div></div>';
+}
+function answer(i){if(Q.answered)return;Q.answered=true;
+  const q=Q.list[Q.i];const opts=document.querySelectorAll('#opts .opt');const ci=q.opts.findIndex(o=>o.correct);const ok=q.opts[i].correct;
+  opts.forEach((el,idx)=>{el.style.pointerEvents='none';if(idx===ci)el.classList.add('correct');else if(idx===i)el.classList.add('wrong');else el.classList.add('dim');});
+  db.solved++;if(ok)db.correct++;
+  if(ok){Q.correct++;if(db.weak[q.ref.no]){db.weak[q.ref.no]--;if(db.weak[q.ref.no]<=0)delete db.weak[q.ref.no];}}
+  else{Q.wrong.push(q);db.weak[q.ref.no]=(db.weak[q.ref.no]||0)+1;delete db.mastered[q.ref.no];}
+  persist();
+  const fb=$('#fb');fb.className='feedback show '+(ok?'ok':'ng');$('#fbT').textContent=ok?'정답! 正解 🎉':'오답… 不正解';$('#fbX').innerHTML=q.explain||'';
+  const b=document.createElement('button');b.className='btn'+(ok?' mint':'');b.textContent=(Q.i+1<Q.list.length)?'次へ →':'結果を見る';b.onclick=next;fb.appendChild(b);
+  fb.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function next(){Q.i++;if(Q.i<Q.list.length)renderQ();else result();}
+function result(){$('#progBar').style.width='100%';$('#qCount').textContent='完了';
+  const total=Q.list.length,pct=Math.round(Q.correct/total*100),sec=Math.round((Date.now()-Q.t0)/1000);
+  const col=pct>=80?'var(--mint)':pct>=60?'var(--amber)':'var(--coral)';
+  const msg=pct>=90?'완벽해요! 完璧':pct>=70?'잘했어요! その調子':pct>=50?'조금 더! あと一歩':'화이팅! 復習しよう';
+  const circ=2*Math.PI*70;let rev='';
+  if(Q.wrong.length){rev='<div class="sec" style="margin:22px 4px 12px"><span class="dot"></span><h2>間違えた単語</h2></div><div class="review">'+
+    Q.wrong.map(q=>{const c=q.opts.find(o=>o.correct).text;const qd=q.sentence?q.sentence.replace('(　　)','◯'):q.prompt;return '<div class="ri"><div class="q">'+qd+'</div><div class="a"><span class="c">正解: '+c+'</span></div></div>';}).join('')+'</div>';}
+  $('#qwrap').className='qwrap fade';
+  $('#qwrap').innerHTML='<div class="result"><div class="ring"><svg width="160" height="160" viewBox="0 0 160 160"><circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="12"/><circle cx="80" cy="80" r="70" fill="none" stroke="'+col+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+(circ*(1-pct/100))+'" transform="rotate(-90 80 80)" style="transition:stroke-dashoffset 1s"/></svg><div class="score"><b style="color:'+col+'">'+pct+'%</b><span>正答率</span></div></div>'+
+    '<h3>'+msg+'</h3><p>'+total+'問中 '+Q.correct+'問正解 ／ '+sec+'秒</p>'+
+    '<div class="rstats"><div><b style="color:var(--ok)">'+Q.correct+'</b><span>正解</span></div><div><b style="color:var(--ng)">'+Q.wrong.length+'</b><span>不正解</span></div><div><b style="color:var(--amber)">'+Object.keys(db.weak).length+'</b><span>苦手累計</span></div></div>'+
+    '<button class="btn mint" onclick="startQuiz(\''+Q.mode+'\','+(Q.count||total)+')">もう一度 ↻</button>'+
+    '<button class="btn ghost" onclick="closeScreen()" style="margin-top:10px">ホームへ戻る</button>'+rev+'</div>';
+  $('#qwrap').scrollTop=0;$('#screen').scrollTop=0;
+}
+
+/* ================= EXAMPLE MODE (signature) ================= */
+let EX={list:[],i:0,known:0};
+function exampleMode(){const pool=poolWords();if(!pool.length){toast('対象がありません');return}EX={list:shuffle(pool),i:0,known:0};openScreen();renderEx();}
+function renderEx(){if(EX.i>=EX.list.length)return exDone();
+  const w=EX.list[EX.i];const ex=w.ex[Math.floor(Math.random()*w.ex.length)];
+  // highlight the word stem in the sentence
+  let sent=ex[0];const stem=w.kr.replace(/다$/,'');const re=new RegExp('('+stem.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[가-힣]*)');
+  if(re.test(sent))sent=sent.replace(re,'<span class="hl">$1</span>');
+  $('#progBar').style.width=(EX.i/EX.list.length*100)+'%';$('#qCount').textContent=(EX.i+1)+' / '+EX.list.length;
+  const c=$('#qwrap');c.className='qwrap fade';
+  c.innerHTML='<div class="qtype">例文モード ｜ '+POS_LABELS[w.posCat]+'</div>'+
+    '<div class="excard tapcard" id="exc" onclick="exReveal()">'+
+      '<div class="exlabel">タップで意味・訳を表示</div>'+
+      '<div class="exsent">'+sent+'</div>'+
+      '<div class="exword" id="exw"><div class="w">'+w.kr+'</div><div class="m">'+w.jp+'</div>'+(w.pron?'<div class="p">［'+w.pron+'］</div>':'')+'</div>'+
+      '<div class="exjp" id="exj">'+ex[1]+'</div>'+
+    '</div>'+
+    '<div class="opts"><button class="opt" style="justify-content:center;border-color:rgba(255,107,107,.4)" onclick="exNext(false)"><span style="color:var(--coral)">まだ ✕</span></button>'+
+    '<button class="opt" style="justify-content:center;border-color:rgba(84,230,193,.5)" onclick="exNext(true)"><span style="color:var(--mint)">覚えた ✓</span></button></div>'+
+    '<button class="btn ghost" onclick="closeScreen()">ホームへ</button>';
+}
+function exReveal(){$('#exw').classList.add('show');$('#exj').classList.add('show');const l=$('#exc').querySelector('.exlabel');if(l)l.style.opacity=0;}
+function exNext(known){const w=EX.list[EX.i];if(known){db.mastered[w.no]=true;if(db.weak[w.no])delete db.weak[w.no];EX.known++;}else{db.weak[w.no]=(db.weak[w.no]||0)+1;delete db.mastered[w.no];}persist();EX.i++;renderEx();}
+function exDone(){$('#progBar').style.width='100%';$('#qCount').textContent='完了';
+  $('#qwrap').innerHTML='<div class="result"><h3 style="margin-top:30px">📖 一周しました！</h3><p>'+EX.list.length+'語中 '+EX.known+'語を「覚えた」</p>'+
+    '<div class="rstats"><div><b style="color:var(--ok)">'+EX.known+'</b><span>覚えた</span></div><div><b style="color:var(--coral)">'+(EX.list.length-EX.known)+'</b><span>まだ</span></div><div><b style="color:var(--amber)">'+Object.keys(db.mastered).length+'</b><span>累計</span></div></div>'+
+    '<button class="btn mint" onclick="exampleMode()">もう一周 ↻</button><button class="btn ghost" onclick="closeScreen()" style="margin-top:10px">ホームへ</button></div>';
+  refreshHome();
+}
+
+/* ================= FLASHCARDS ================= */
+let FC={list:[],i:0,known:0};
+function flash(){const pool=poolWords();if(!pool.length){toast('対象がありません');return}FC={list:shuffle(pool),i:0,known:0};openScreen();renderFC();}
+function renderFC(){if(FC.i>=FC.list.length)return fcDone();const w=FC.list[FC.i];
+  $('#progBar').style.width=(FC.i/FC.list.length*100)+'%';$('#qCount').textContent=(FC.i+1)+' / '+FC.list.length;
+  const c=$('#qwrap');c.className='qwrap fade';
+  c.innerHTML='<div class="qtype">FLASHCARD ｜ '+POS_LABELS[w.posCat]+'</div>'+
+    '<div class="excard tapcard" id="fcc" onclick="fcFlip()">'+
+      '<div class="exlabel" id="fcl">タップで意味</div>'+
+      '<div class="qword kr" style="font-size:40px">'+w.kr+'</div>'+
+      '<div class="exword" id="fcb"><div class="m" style="font-size:22px">'+w.jp+'</div>'+(w.pron?'<div class="p">［'+w.pron+'］</div>':'')+'<div style="font-size:13px;color:var(--sub);margin-top:12px;font-family:Gowun Dodum">'+w.ex[0][0]+'</div><div style="font-size:12px;color:var(--mute);margin-top:3px">'+w.ex[0][1]+'</div></div>'+
+    '</div>'+
+    '<div class="opts"><button class="opt" style="justify-content:center;border-color:rgba(255,107,107,.4)" onclick="fcNext(false)"><span style="color:var(--coral)">まだ ✕</span></button>'+
+    '<button class="opt" style="justify-content:center;border-color:rgba(84,230,193,.5)" onclick="fcNext(true)"><span style="color:var(--mint)">覚えた ✓</span></button></div>'+
+    '<button class="btn ghost" onclick="closeScreen()">ホームへ</button>';
+}
+function fcFlip(){$('#fcb').classList.add('show');const l=$('#fcl');if(l)l.style.opacity=0;}
+function fcNext(known){const w=FC.list[FC.i];if(known){db.mastered[w.no]=true;if(db.weak[w.no])delete db.weak[w.no];FC.known++;}else{db.weak[w.no]=(db.weak[w.no]||0)+1;}persist();FC.i++;renderFC();}
+function fcDone(){$('#progBar').style.width='100%';$('#qCount').textContent='完了';
+  $('#qwrap').innerHTML='<div class="result"><h3 style="margin-top:30px">🃏 一周しました！</h3><p>'+FC.list.length+'枚中 '+FC.known+'枚を「覚えた」</p><button class="btn mint" onclick="flash()">もう一度 ↻</button><button class="btn ghost" onclick="closeScreen()" style="margin-top:10px">ホームへ</button></div>';refreshHome();}
+
+/* ================= BROWSE ================= */
+function browse(){openScreen();$('#qCount').textContent='';$('#progBar').style.width='0';const w=$('#qwrap');w.className='qwrap';w.style.justifyContent='flex-start';
+  w.innerHTML='<div class="qtype" style="margin-top:6px">単語リスト ｜ 頻出A 300語</div><div class="searchbar"><input id="wsearch" placeholder="ハングル・日本語で検索…" oninput="filterBrowse()"></div><div class="wlist" id="wlist"></div>';
+  renderWlist(WORDS);}
+function renderWlist(arr){const el=$('#wlist');if(!arr.length){el.innerHTML='<div class="empty">該当なし</div>';return}
+  el.innerHTML=arr.map(w=>'<div class="wi"><div class="top"><span class="no">'+w.no+'</span><span class="k">'+w.kr+'</span><span class="pos">'+w.pos+'</span><span class="j">'+w.jp+'</span></div><div class="ex"><span class="ko">'+w.ex[0][0]+'</span>'+w.ex[0][1]+'</div></div>').join('');}
+function filterBrowse(){const q=$('#wsearch').value.trim().toLowerCase();if(!q){renderWlist(WORDS);return}
+  const r=WORDS.filter(w=>w.kr.includes(q)||w.jp.toLowerCase().includes(q)||(''+w.no)===q);renderWlist(r);}
+
+/* ---- init ---- */
+buildChips();refreshHome();
+if(!db.examDate)setTimeout(openDateModal,500);
+</script>
+</body>
+</html>
